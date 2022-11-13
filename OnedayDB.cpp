@@ -175,7 +175,7 @@ int OnedayDB::searchOnedayDB(string phonenum)
 
 
 
-int OnedayDB::searchOnedayDB_time(string current_time)
+int OnedayDB::searchOnedayDB_time(string current_time, Person* person)
 {
 	
 	Oneday* current = start;
@@ -195,9 +195,11 @@ int OnedayDB::searchOnedayDB_time(string current_time)
 //		cout<<"넘어가나2"<<endl;
 //		cout << "kkk" << double_expert_date << " "<< endl;
 		if (double_current_time >= double_expert_date) {
-			cout << current->DB_phone_num << " 고객님 만료시간 : " << current->DB_expert_date << "OnedayDB에서 삭제할 예정입니다. (OnedayDB.cpp)\n"<<endl;
+			//cout << current->DB_phone_num << " 고객님 만료시간 : " << current->DB_expert_date << "OnedayDB에서 삭제할 예정입니다. (OnedayDB.cpp)\n"<<endl;
 			//cout<<current->DB_seat_num<<endl;
 			seatnum_return=stoi(current->DB_seat_num);
+			string seat_str = seat.idxToString(current->DB_seat_num);
+			cout <<"단일권 회원 "<< seat_str << "석 "<< person->Name << "님 정기권 만료되었습니다.\n";
 //			cout<<"넘겨줄 자리 번호 확인할게: "<<seatnum_return <<endl;
 			deleteOneday(current->DB_phone_num);
 			//cout<<"삭제되었습니다.\n"<<endl;
@@ -209,6 +211,27 @@ int OnedayDB::searchOnedayDB_time(string current_time)
 		}
 	}
 	return -1;
+}
+
+void SeasonDB::ChangeSeat_3(string phone_num,Person* person){
+	Oneday* temp = start;
+	SeatDB seat;
+	int nodeIndex=searchOnedayDB(phonenum)-1;
+	
+	for (int i = 0; i < nodeIndex - 1; i++)
+	{
+		temp = temp->next;
+	}
+	int seat1 = temp->DB_seat_num;
+	string seat_str = seat.idxToString(current->DB_seat_num);
+	cout << person->Name <<"님 현재 "<<seat_str<<" 좌석 이용중입니다.";
+ 	int seat2 = seat.chooseSeat(2);
+	if(seat2==-1){
+		return;
+	}
+//원래자리 삭제
+seat.delSeat(seat1);
+temp ->DB_seat_num = to_string(seat2);
 }
 
 bool OnedayDB::readFile()

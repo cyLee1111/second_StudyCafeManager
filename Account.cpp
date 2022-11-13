@@ -42,7 +42,7 @@ void Account::readDB()
 void Account::writeDB()
 {
 	ofstream file;
-	file.open("account.txt", ios::out);
+	file.open("account.txt", ios::trunc);
 
 	if (!file) { //오류처리
 		cout << "account open 오류\n";
@@ -75,11 +75,109 @@ string Account::int2string(int I)
 
 }
 
+string Account::plusDate(int Y, int M, int D, int day, int price, int* all) {
+
+	day = day - 1;
+	if ((M % 2 == 1)) //odd month 
+	{
+		if (M <= 7) {  //31까지
+			if (31- day <= D) {  // 달 안넘겨줘도됨
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				all += price;
+				return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+			}
+			else { // 달 넘겨줌
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				all += price;
+				return to_string(Y) + int2string(M + 1) + int2string((D + day) - 31) + "2359";
+			}
+		}
+		else { // month > 7  30까지
+			if (30- day <= D) {  // 달 안넘겨줘도됨
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				all += price;
+				return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+			}
+			else { // 달 넘겨줌
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				all += price;
+				return to_string(Y) + int2string(M + 1) + int2string((D + day) - 30) + "2359";
+			}
+		}
+	}
+	else //even month
+	{
+		if (month <= 6) {
+			if (month == 2)
+			{
+				if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) // leap year
+				{
+					if (29- day <= D) {  // 달 안넘겨줘도됨
+
+						return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+					}
+					else { // 달 넘겨줌
+
+						return to_string(Y) + int2string(M + 1) + int2string((D + day) - 29) + "2359";
+					}
+				}
+				else { //윤달이 아닌 2월
+
+					if (28- day <= D) {  // 달 안넘겨줘도됨
+
+						return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+					}
+					else { // 달 넘겨줌
+
+						return to_string(Y) + int2string(M + 1) + int2string((D + day) - 28) + "2359";
+					}
+				}
+
+			}
+			else { //윤달아닌
+				if(M==12){//12월일때
+					if (31 - day <= D) {  // 달 안넘겨줘도됨
+
+						return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+					}
+					else { // 달 넘겨줌
+						return to_string(Y+1) + int2string(1) + int2string((D + day) - 31) + "2359";
+					}
+					
+				}
+				if (30- day <= D) {  // 달 안넘겨줘도됨
+
+					return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+				}
+				else { // 달 넘겨줌
+					
+					return to_string(Y) + int2string(M + 1) + int2string((D + day) - 30) + "2359";
+				}
+			}
+		}
+		else { // month > 6
+
+			if (25 <= D) {  // 달 안넘겨줘도됨
+
+				return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
+			}
+			else { // 달 넘겨줌
+
+				return to_string(Y) + int2string(M + 1) + int2string((D + day) - 31) + "2359";
+			}
+		}
+	}
+
+}
+
 string Account::payTicket(string seat)
 {
 	int num, price = 0;
 	int hour, day;
-	Time t; // 날짜계산을 위한
 
 
 //날짜
@@ -123,13 +221,27 @@ string Account::payTicket(string seat)
 			cin.clear();
 		}
 
-		if (choice == 1) {
-	
-		else if (choice == 2) {
-	
+		if (choice == 1) { //7일
+			day = 7; price = 70;
+			cout << price << "원 결제합니다. (Enter)\n";
+			checkEnter();
+			Saccount += price;
+			return plusDate(Y, M, D, day);
 		}
-		else if (choice == 3) {
-	
+		else if (choice == 2) {  //14일
+			day = 14; price = 140;
+			cout << price << "원 결제합니다. (Enter)\n";
+			checkEnter();
+			Saccount += price;
+			return plusDate(Y, M, D, day);
+		}
+		else if (choice == 3) {   //28일
+			day = 28; price = 280;
+			cout << price << "원 결제합니다. (Enter)\n";
+			checkEnter();
+			Saccount += price;
+			return plusDate(Y, M, D, day);
+		}
 
 	}
 	else if (num == 3) {  //단일권
@@ -143,18 +255,50 @@ string Account::payTicket(string seat)
 		cin.clear();
 
 		if (choice == 1) {
-
+			hour = 8; price = 8;
+			if (H >= 16) {
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				Oaccount += price;
+				return to_string(Y) + int2string(M) + int2string(D) + "2359";
+			}
+			else {
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				Oaccount += price;
+				return to_string(Y) + int2string(M) + int2string(D) + int2string(H + hour) + int2string(min);
+			}
 		}
 		else if (choice == 2) {
-			
+			hour = 16; price = 16;
+			if (H >= 8) {
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				Oaccount += price;
+				return to_string(Y) + int2string(M) + int2string(D) + "2359";
+			}
+			else {
+				cout << price << "원 결제합니다. (Enter)\n";
+				checkEnter();
+				Oaccount += price;
+				return to_string(Y) + int2string(M) + int2string(D) + int2string(H + hour) + int2string(min);
+			}
 		}
 		else if (choice == 3) {
-			
+			hour = 24; price = 24;
+			cout << price << "원 결제합니다. (Enter)\n";
+			checkEnter();
+			Oaccount += price;
+			return to_string(Y) + int2string(M) + int2string(D) + "2359";
+		}
 	}
+			
 
 	return "0";
 	
 }
+
+
 
 bool Account::checkEnter()
 {

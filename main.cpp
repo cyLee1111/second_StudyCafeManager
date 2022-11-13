@@ -52,12 +52,12 @@ int main()
 		cin.clear();
 		cout << endl;
 		cout << "┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────┐" << endl;
-		cout << "│ [1] 회원가입 │ │ [2] 회원입장 │ │ [3] 회원퇴실 │ │ [4] 회원확인 │ │ [5] 좌석확인 │ │ [6] 좌석확인 │ │ [7] 회   계  │ │ 종료: Q│" << endl;
+		cout << "│ [1] 회원가입 │ │ [2] 회원입장 │ │ [3] 회원퇴실 │ │ [4] 회원확인 │ │ [5] 좌석확인 │ │ [6] 좌석이동 │ │ [7] 회    계 │ │ 종료: Q│" << endl;
 		cout << "└──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └────────┘" << endl;
 		cout<<">> ";
 		cin >> menu;
 		cin.clear();
-		if(menu.compare("1") == 0){											// [1]: 회원가입
+		if(menu.compare("1") == 0){											// [1] 회원가입
 			while (!personDB.signup(currentTime,account););
 			//회원 가입 완료 
 			continue;
@@ -113,7 +113,7 @@ int main()
 			continue;
 		}
 
-		else if (menu.compare("3") == 0) {								// [3] 회원퇴실
+		else if (menu.compare("3") == 0) {									// [3] 회원퇴실
 			bool ft;
 			string PhoneNum = personDB.inputPhoneNum();
 			if (season.searchSeasonDB(PhoneNum)) {
@@ -127,7 +127,7 @@ int main()
 			continue;
 		}
 
-		else if (menu.compare("4") == 0) {								// [4] 회원확인
+		else if (menu.compare("4") == 0) {									// [4] 회원확인
 			string PhoneNum = personDB.inputPhoneNum();
 			//[ 2022-09-28 16:15:54 ] 구본무 고객님 / 단일권 2시간 34분 남았습니다.
 			personDB.showPersonInfo(PhoneNum, currentTime);
@@ -136,11 +136,11 @@ int main()
 
 		
 
-		else if (menu.compare("5") == 0) {								// [5] 자리확인
+		else if (menu.compare("5") == 0) {									// [5] 자리확인
 			seat.showSeat();
 			continue;
 		}
-		else if (menu.compare("6") == 0){
+		else if (menu.compare("6") == 0){									// [6] 좌석이동
 			
 			string PhoneNum = personDB.inputPhoneNum();
 			Person* targetPerson = personDB.searchPerson(PhoneNum);
@@ -151,11 +151,17 @@ int main()
 			}
 			
 			if (targetPerson->Seat.compare("1")==0) {	//정기권 (지정석) 회원
-				
+				season.ChangeSeat_1(PhoneNum,targetPerson);
+			}
+			else if (targetPerson->Seat.compare("2")==0) {	//정기권 (자유석) 회원
+				season.ChangeSeat_2(PhoneNum,targetPerson);
+			}
+			else if(targetPerson->Seat.compare("3")==0){
+				oneday.ChangeSeat_3(PhoneNum,targetPerson);
 			}
 			
 		}
-		else if (menu.compare(7"") == 0) {								// [7] 회    계
+		else if (menu.compare("7") == 0) {									// [7] 회    계
 			cout << "[";
 			time.showTime();
 			cout << "]\n";
@@ -165,7 +171,7 @@ int main()
 		else if (menu.compare("Q") != 0) {
 			cout<<"잘못된 입력입니다."<<endl;
 		}
-	} while (menu != "Q");												// [Q] 종    료
+	} while (menu != "Q");													// [Q] 종    료
 
 
 	// 파일쓰기

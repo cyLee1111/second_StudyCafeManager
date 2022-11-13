@@ -154,10 +154,8 @@ bool SeatDB::fixSeat(int memType, int idx)
 // 선택받은 좌석삭제
 bool SeatDB::delSeat(int idx)
 {
-//	cout << "해?나함수ㅎㅎ" << endl;
-//	cout << "찬양이가받은idx : " << idx << endl;
 	if (idx < 0) {
-//		cout << "좌석삭제할거없음" << endl;
+		//cout << "좌석삭제할거없음" << endl;
 		return false;
 	}
 	readFile();
@@ -183,7 +181,7 @@ string SeatDB::toChar(string seat)
 	}
 }
 
-// 0~29 인덱스를 "A1"로 변경
+// 0~29 인덱스를 A1~C10 으로 변경
 string SeatDB::idxToString(int idx)
 {
 	char c1 = char('A' + (idx / 10));

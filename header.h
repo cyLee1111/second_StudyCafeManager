@@ -67,6 +67,8 @@ class Account {
         void showAccount();
         string int2string(int I);
         string payTicket(string seat);
+        string plusDate(int Y, int M, int D, int day);
+        //string plusDate(int Y, int M, int D, int day, int price, int* all);
         bool checkEnter();
 };
 
@@ -101,12 +103,12 @@ class OnedayDB
         //DB 삭제할 때 몇번째 노드인지 확인용 함수 
         int searchOnedayDB(string phonenum);
         bool deleteOneday(string phonenum);
-        int searchOnedayDB_time(string currentTime);
+        int searchOnedayDB_time(string currentTime, Person* person);
         void ReEntrance(string phonenum,string current_time);  //재입장
         void ReEntranceNseat(string phonenum,int seatnum,string current_time);
         int searchOnedayDB_retseatIdx(string PhoneNum); //좌석이 없는경우 찬양한테 자리넘버넘겨줘
-    private:
-        int cntSize = 0;
+        void ChangeSeat_3(string phone_num,Person* person);
+   
 };
 
 class Season
@@ -140,12 +142,11 @@ class SeasonDB
         void ReEntrance(string phonenum,string current_time);  //재입장
         void ReEntranceNseat(string phonenum,int seatnum,string current_time);  //재입장 자리선택 필요한경우
         int searchSeasonDB(string phonenum);	//전번 있으면 true
-        int searchSeasonDB_time(string current_time);   //시간보고 회원 삭제
+        int searchSeasonDB_time(string current_time, Person* person);   //시간보고 회원 삭제
         int searchSeasonDB_retseatIdx(string PhoneNum); //좌석이 없는경우 찬양한테 자리넘버넘겨줘
-        void ChangeSeat_1(string phone_num,Person person); //정기권(지정석) 자리 이동
-        void ChangeSeat_2(string phone_num,Person person) ; //정기권(자유석) 자리 이동
-    private:
-        int cntSize = 0;
+        void ChangeSeat_1(string phone_num,Person* person); //정기권(지정석) 자리 이동
+        void ChangeSeat_2(string phone_num,Person* person); //정기권(자유석) 자리 이동
+   
 };
 
 class Person {

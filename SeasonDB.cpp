@@ -175,7 +175,7 @@ int SeasonDB::searchSeasonDB(string phonenum)
 	return 0;
 }
 //time 비교해서 만료된 노드 삭제하는 함수
-int SeasonDB::searchSeasonDB_time(string current_time)
+int SeasonDB::searchSeasonDB_time(string current_time, Person* person)
 {
 	
 	Season* current = start;
@@ -193,9 +193,10 @@ int SeasonDB::searchSeasonDB_time(string current_time)
     	double double_expert_date = stod(current->DB_expert_date);
 //		cout <<"kkk"<< double_expert_date << " " << double_current_time << endl;
 		if (double_current_time >= double_expert_date) {
-			cout<<current->DB_phone_num<<" 고객님 만료시간 : "<<current->DB_expert_date<<" SeasonDB에서 삭제합니다. (SeasonDB.cpp)\n";
+			//cout<<current->DB_phone_num<<" 고객님 만료시간 : "<<current->DB_expert_date<<" SeasonDB에서 삭제합니다. (SeasonDB.cpp)\n";
 			int_seatnum = stoi(current->DB_seat_num);
-//			cout<<"넘겨줄 자리 번호 확인할게: "<<int_seatnum <<endl;
+			string seat_str = seat.idxToString(current->DB_seat_num);
+			cout <<"정기권 회원 "<< seat_str << "석 "<< person->Name << "님 정기권 만료되었습니다.\n";
 			deleteSeason(current->DB_phone_num);
 			current = start;
 			return int_seatnum;
@@ -207,9 +208,10 @@ int SeasonDB::searchSeasonDB_time(string current_time)
 	return -1;
 }
 //정기권 지정석 좌석 이동
-void SeasonDB::ChangeSeat_1(string phone_num,ㅔ){
+void SeasonDB::ChangeSeat_1(string phone_num,Person* person){
 	Season* temp = start;
-	int nodeIndex=searchOnedayDB(phonenum)-1;
+	SeatDB seat;
+	int nodeIndex=searchSeasonDB(phonenum)-1;
 	
 	for (int i = 0; i < nodeIndex - 1; i++)
 	{
@@ -218,14 +220,37 @@ void SeasonDB::ChangeSeat_1(string phone_num,ㅔ){
 	int seat1 = temp->DB_seat_num;
 	string seat_str = seat.idxToString(current->DB_seat_num);
 	cout << person->Name <<"님 현재 "<<seat_str<<" 좌석 이용중입니다.";
- 	int seat2 = seat.chooseSeat(3);
+ 	int seat2 = seat.chooseSeat(1);
 	if(seat2==-1){
 		return;
 	}
 //원래자리 삭제
 seat.delSeat(seat1);
- temp ->DB_seat_num = to_string(seat2);
+temp ->DB_seat_num = to_string(seat2);
 }
+
+//정기권 자유석 좌석 이동
+void SeasonDB::ChangeSeat_2(string phone_num,Person* person){
+	Season* temp = start;
+	SeatDB seat;
+	int nodeIndex=searchSeasonDB(phonenum)-1;
+	
+	for (int i = 0; i < nodeIndex - 1; i++)
+	{
+		temp = temp->next;
+	}
+	int seat1 = temp->DB_seat_num;
+	string seat_str = seat.idxToString(current->DB_seat_num);
+	cout << person->Name <<"님 현재 "<<seat_str<<" 좌석 이용중입니다.";
+ 	int seat2 = seat.chooseSeat(2);
+	if(seat2==-1){
+		return;
+	}
+//원래자리 삭제
+seat.delSeat(seat1);
+temp ->DB_seat_num = to_string(seat2);
+}
+
 bool SeasonDB::readFile()
 {
 	string path = "season.txt";
