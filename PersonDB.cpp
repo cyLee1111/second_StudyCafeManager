@@ -247,6 +247,10 @@ bool PersonDB::writeFile(){
 
 bool PersonDB::signup(string currentTime,Account inaccount){
     string PhoneNum=inputPhoneNum();
+    if(searchPerson(PhoneNum)!=NULL){
+        cout<<"이미 존재하는 회원입니다."<<endl;
+        return false;
+    }
     string Name=inputName();
     string inseat=inputSeat();
     int seatInt;
