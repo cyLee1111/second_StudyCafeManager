@@ -159,6 +159,21 @@ void Time::insertTime()//시간입력함수
 	while (1) {
 		cout << "현재 시간은 몇 시 몇 분 입니까?(ex1:0959 ex2:1701): \n>> ";
 		cin >> Time;
+		
+		string strTime;
+		strTime=to_string(Time);
+		if(strTime.length()!=4){
+			cout<<"4글자를 입력하셔야합니다."<<endl;
+			continue;
+		}
+		for(int i=0;i<12;i++){
+			if(strTime[i]<'0'||strTime[i]>'9'){
+				cout<<"숫자만 입력하세요"<<endl;
+				continue;
+			}
+		}
+		
+		
 		H = Time / 100;
 		min = Time % 100;
 		cin.clear();
