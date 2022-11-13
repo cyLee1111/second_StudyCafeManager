@@ -2,185 +2,189 @@
 
 int main()
 {
-	cin.clear();
-	SeasonDB season;
-	OnedayDB oneday;
-	SeatDB seat;
-	Account account;
-	Time time;
-	PersonDB personDB(season, oneday, seat, account); //person »ı¼ºÀÚ ÃÊ±âÈ­½Ã ÀÌ¹Ì »ı¼ºµÈ class Àü´ŞÇØ¾ß µÊ
-	personDB.initLinkedList();
-	// ÆÄÀÏÀĞ±â
-	account.readDB();
-	time.readData();
-	season.readFile();
-	oneday.readFile();
-	personDB.readFile();
-	string menu;
-	do {
-		// ½Ã°£ÀÔ·ÂÇÏ±âÇÔ¼ö
-		time.insertTime();
-		//ÇöÀç ½Ã°£
-		string currentTime=time.returnTime();
-		//°´Ã¼ º° ½Ã°£ ¾÷µ¥ÀÌÆ®
-		account.whatTime(currentTime);
-		//¸¸·áµÈ È¸¿øÀ» DB¿¡¼­ »èÁ¦
-		//personDB.deleteOneday(currentTime);
-		
-		personDB.deleteEndPerson(currentTime);
-		
-		time.showTime();
-		cout<<"Á¤±â±Ç ¸¸·á È¸¿øÀÌ ÀÖ´Ù¸é »èÁ¦ÇÕ´Ï´Ù..."<<endl;
-		
-		seat.delSeat(season.searchSeasonDB_time(currentTime));
-	
-		// Ãâ·Â
-		// Person* person;
-		// while(person=personDB.deleteEndPerson(currenttime)!=NULL){
-		// 	seat.delSeat(season.searchSeasonDB_time(currentTime,person));
-		// }
-		
-		
-		time.showTime();
-		cout<<"´ÜÀÏ±Ç ¸¸·á È¸¿øÀÌ ÀÖ´Ù¸é »èÁ¦ÇÕ´Ï´Ù..."<<endl;
-		// Ãâ·Â
-		// Person* person;
-		// while(person=personDB.deleteEndPerson(currenttime)!=NULL){
-		// 	seat.delSeat(oneday.searchSeasonDB_time(currentTime,person));
-		// }
-		seat.delSeat(oneday.searchOnedayDB_time(currentTime));
-		cin.clear();
-		cout << endl;
-		cout << "¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤" << endl;
-		cout << "¦¢ [1] È¸¿ø°¡ÀÔ ¦¢ ¦¢ [2] È¸¿øÀÔÀå ¦¢ ¦¢ [3] È¸¿øÅğ½Ç ¦¢ ¦¢ [4] È¸¿øÈ®ÀÎ ¦¢ ¦¢ [5] ÁÂ¼®È®ÀÎ ¦¢ ¦¢ [6] ÁÂ¼®È®ÀÎ ¦¢ ¦¢ [7] È¸   °è  ¦¢ ¦¢ Á¾·á: Q¦¢" << endl;
-		cout << "¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥" << endl;
-		cout<<">> ";
-		cin >> menu;
-		cin.clear();
-		if(menu.compare("1") == 0){											// [1]: È¸¿ø°¡ÀÔ
-			while (!personDB.signup(currentTime,account););
-			//È¸¿ø °¡ÀÔ ¿Ï·á 
-			continue;
-			//´Ù½Ã ½ÃÀÛ ¸Ş´º·Î
-			
-		}
-		else if (menu.compare("2") == 0) {									// [2] È¸¿øÀÔÀå
-			string PhoneNum = personDB.inputPhoneNum();
-			Person* targetPerson = personDB.searchPerson(PhoneNum);
-			if (targetPerson == NULL) {	// ÀüÈ­¹øÈ£X, È¸¿ø°¡ÀÔ
-				while (!personDB.signup(PhoneNum, currentTime, account));
-				//È¸¿ø °¡ÀÔ ¿Ï·á 
-				continue;
-				//´Ù½Ã ½ÃÀÛ ¸Ş´º·Î
-			}
-			cout <<"targetperson seat Ãâ·Â" <<targetPerson->Seat << endl;
-			if (targetPerson->Seat.compare("1")==0) {	// ÀüÈ­¹øÈ£O, ÀÔÀå
-				cout << "Á¤±â±Ç (ÁöÁ¤¼®)" << endl;				//ÁÖ¼®
-				season.ReEntrance(PhoneNum, currentTime);
-				cout << "ÀÔÀåÀÔ´Ï´Ù ^^ (Á¤±â±Ç)" << endl;
-			}
-			else if (targetPerson->Seat.compare("2")==0) {
-				cout << "Á¤±â±Ç (ÀÚÀ¯¼®)" << endl;				//ÁÖ¼®
-				//ÁÂ¼® ÀÖÀ½
-				if ((season.searchSeasonDB_retseatIdx(PhoneNum)>0)) {
-					season.ReEntrance(PhoneNum, currentTime);
-				}
-				else {
-					//ÁÂ¼® x  - ÁÂ¼® ¹èÁ¤
-					int seatnum = seat.chooseSeat(2);
-					season.ReEntranceNseat(PhoneNum, seatnum, currentTime);
-				}
-				//ÀÔÀå
-				cout << "ÀÔÀåÀÔ´Ï´Ù ^^ (Á¤±â±Ç)" << endl;
-			}
-			else if (targetPerson->Seat.compare("3")==0) {
-				cout << "´ÜÀÏ±Ç" << endl;
-				//ÁÂ¼® ÀÖÀ½
-				if (oneday.searchOnedayDB_retseatIdx(PhoneNum) > 0) {
-					oneday.ReEntrance(PhoneNum, currentTime);
-				}
-				else {
-					//ÁÂ¼® ¾øÀ½
-					//ÁÂ¼® ¹èÁ¤
-					int seatnum = seat.chooseSeat(3);
-					oneday.ReEntranceNseat(PhoneNum, seatnum, currentTime);
-				}
-				cout << "ÀÔÀåÀÔ´Ï´Ù ^^ (´ÜÀÏ±Ç)" << endl;
-			}
-			else {
-				cout << "Àß¸øµÈ ÀÔ·Â(ÀÚ¸®°¡ 1 2 3 ÀÌ ¾Æ´Õ´Ï´Ù.)" << endl;
-			}
-			continue;
-		}
+   cin.clear();
+   SeasonDB season;
+   OnedayDB oneday;
+   SeatDB seat;
+   Account account;
+   Time time;
+   PersonDB personDB(season, oneday, seat, account); //person ìƒì„±ì ì´ˆê¸°í™”ì‹œ ì´ë¯¸ ìƒì„±ëœ class ì „ë‹¬í•´ì•¼ ë¨
+   personDB.initLinkedList();
+   // íŒŒì¼ì½ê¸°
+   account.readDB();
+   time.readData();
+   season.readFile();
+   oneday.readFile();
+   personDB.readFile();
+   string menu;
+   do {
+      // ì‹œê°„ì…ë ¥í•˜ê¸°í•¨ìˆ˜
+      time.insertTime();
+      //í˜„ì¬ ì‹œê°„
+      string currentTime = time.returnTime();
+      //ê°ì²´ ë³„ ì‹œê°„ ì—…ë°ì´íŠ¸
+      account.whatTime(currentTime);
+      //ë§Œë£Œëœ íšŒì›ì„ DBì—ì„œ ì‚­ì œ
+      //personDB.deleteOneday(currentTime);
 
-		else if (menu.compare("3") == 0) {								// [3] È¸¿øÅğ½Ç
-			bool ft;
-			string PhoneNum = personDB.inputPhoneNum();
-			if (season.searchSeasonDB(PhoneNum)) {
-				season.deleteSeason(PhoneNum);
-				cout << "Åğ½Ç Ã³¸® µÇ¾ú½À´Ï´Ù." << endl;
-			}
-			else {
-				cout << "Á¸ÀçÇÏÁö ¾Ê´Â È¸¿øÀÔ´Ï´Ù." << endl;
-			}
-			//season.writeFile();
-			continue;
-		}
+      //personDB.deleteEndPerson(currentTime);
 
-		else if (menu.compare("4") == 0) {								// [4] È¸¿øÈ®ÀÎ
-			string PhoneNum = personDB.inputPhoneNum();
-			//[ 2022-09-28 16:15:54 ] ±¸º»¹« °í°´´Ô / ´ÜÀÏ±Ç 2½Ã°£ 34ºĞ ³²¾Ò½À´Ï´Ù.
-			personDB.showPersonInfo(PhoneNum, currentTime);
-			continue;
-		}
-
-		
-
-		else if (menu.compare("5") == 0) {								// [5] ÀÚ¸®È®ÀÎ
-			seat.showSeat();
-			continue;
-		}
-		else if (menu.compare("6") == 0){
-			
-			string PhoneNum = personDB.inputPhoneNum();
-			Person* targetPerson = personDB.searchPerson(PhoneNum);
-			while(targetPerson == NULL){
-				cout <<"ÀüÈ­¹øÈ£ ÀÔ·ÂÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n";
-				personDB.inputPhoneNum();
-				targetPerson = personDB.searchPerson(PhoneNum);
-			}
-			
-			if (targetPerson->Seat.compare("1")==0) {	//Á¤±â±Ç (ÁöÁ¤¼®) È¸¿ø
-				
-			}
-			
-		}
-		else if (menu.compare(7"") == 0) {								// [7] È¸    °è
-			cout << "[";
-			time.showTime();
-			cout << "]\n";
-			account.showAccount();
-			continue;
-		}
-		else if (menu.compare("Q") != 0) {
-			cout<<"Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù."<<endl;
-		}
-	} while (menu != "Q");												// [Q] Á¾    ·á
+      time.showTime();
+      cout << "ì •ê¸°ê¶Œ ë§Œë£Œ íšŒì›ì´ ìˆë‹¤ë©´ ì‚­ì œí•©ë‹ˆë‹¤..." << endl;
 
 
-	// ÆÄÀÏ¾²±â
-	cout<<"Account"<<endl;
-	account.writeDB();
-	cout<<"time"<<endl;
-	time.writeData();
-	cout<<"time"<<endl;
-	personDB.writeFile();
-	cout<<"personDB"<<endl;
-	season.writeFile();
-	cout<<"seasonDB"<<endl;
-	oneday.writeFile();
-	cout<<"ÆÄÀÏ ÀúÀå ¿Ï·á"<<endl;
+      // ì¶œë ¥
+       Person* person;
+       while((person=personDB.deleteEndPerson(currentTime))!=NULL){
+          seat.delSeat(season.searchSeasonDB_time(currentTime,person));
+       }
 
-	return 0;
+
+      time.showTime();
+      cout << "ë‹¨ì¼ê¶Œ ë§Œë£Œ íšŒì›ì´ ìˆë‹¤ë©´ ì‚­ì œí•©ë‹ˆë‹¤..." << endl;
+       //ì¶œë ¥
+       while((person=personDB.deleteEndPerson(currentTime))!=NULL){
+          seat.delSeat(oneday.searchOnedayDB_time(currentTime,person));
+       }
+      
+      cin.clear();
+      cout << endl;
+      cout << "â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”" << endl;
+      cout << "â”‚ [1] íšŒì›ê°€ì… â”‚ â”‚ [2] íšŒì›ì…ì¥ â”‚ â”‚ [3] íšŒì›í‡´ì‹¤ â”‚ â”‚ [4] íšŒì›í™•ì¸ â”‚ â”‚ [5] ì¢Œì„í™•ì¸ â”‚ â”‚ [6] ì¢Œì„ì´ë™ â”‚ â”‚ [7] íšŒ    ê³„ â”‚ â”‚ ì¢…ë£Œ: Qâ”‚" << endl;
+      cout << "â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜" << endl;
+      cout << ">> ";
+      cin >> menu;
+      cin.clear();
+      if (menu.compare("1") == 0) {                                 // [1] íšŒì›ê°€ì…
+         while (!personDB.signup(currentTime, account));
+         //íšŒì› ê°€ì… ì™„ë£Œ 
+         continue;
+         //ë‹¤ì‹œ ì‹œì‘ ë©”ë‰´ë¡œ
+
+      }
+      else if (menu.compare("2") == 0) {                           // [2] íšŒì›ì…ì¥
+         string PhoneNum = personDB.inputPhoneNum();
+         Person* targetPerson = personDB.searchPerson(PhoneNum);
+         if (targetPerson == NULL) {   // ì „í™”ë²ˆí˜¸X, íšŒì›ê°€ì…
+            while (!personDB.signup(PhoneNum, currentTime, account));
+            //íšŒì› ê°€ì… ì™„ë£Œ 
+            continue;
+            //ë‹¤ì‹œ ì‹œì‘ ë©”ë‰´ë¡œ
+         }
+         cout << "targetperson seat ì¶œë ¥" << targetPerson->Seat << endl;
+         if (targetPerson->Seat.compare("1") == 0) {   // ì „í™”ë²ˆí˜¸O, ì…ì¥
+            cout << "ì •ê¸°ê¶Œ (ì§€ì •ì„)" << endl;            //ì£¼ì„
+            season.ReEntrance(PhoneNum, currentTime);
+            cout << "ì…ì¥ì…ë‹ˆë‹¤ ^^ (ì •ê¸°ê¶Œ)" << endl;
+         }
+         else if (targetPerson->Seat.compare("2") == 0) {
+            cout << "ì •ê¸°ê¶Œ (ììœ ì„)" << endl;            //ì£¼ì„
+            //ì¢Œì„ ìˆìŒ
+            if ((season.searchSeasonDB_retseatIdx(PhoneNum) > 0)) {
+               season.ReEntrance(PhoneNum, currentTime);
+            }
+            else {
+               //ì¢Œì„ x  - ì¢Œì„ ë°°ì •
+               int seatnum = seat.chooseSeat(2);
+               season.ReEntranceNseat(PhoneNum, seatnum, currentTime);
+            }
+            //ì…ì¥
+            cout << "ì…ì¥ì…ë‹ˆë‹¤ ^^ (ì •ê¸°ê¶Œ)" << endl;
+         }
+         else if (targetPerson->Seat.compare("3") == 0) {
+            cout << "ë‹¨ì¼ê¶Œ" << endl;
+            //ì¢Œì„ ìˆìŒ
+            if (oneday.searchOnedayDB_retseatIdx(PhoneNum) > 0) {
+               oneday.ReEntrance(PhoneNum, currentTime);
+            }
+            else {
+               //ì¢Œì„ ì—†ìŒ
+               //ì¢Œì„ ë°°ì •
+               int seatnum = seat.chooseSeat(3);
+               oneday.ReEntranceNseat(PhoneNum, seatnum, currentTime);
+            }
+            cout << "ì…ì¥ì…ë‹ˆë‹¤ ^^ (ë‹¨ì¼ê¶Œ)" << endl;
+         }
+         else {
+            cout << "ì˜ëª»ëœ ì…ë ¥(ìë¦¬ê°€ 1 2 3 ì´ ì•„ë‹™ë‹ˆë‹¤.)" << endl;
+         }
+         continue;
+      }
+
+      else if (menu.compare("3") == 0) {                           // [3] íšŒì›í‡´ì‹¤
+         bool ft;
+         string PhoneNum = personDB.inputPhoneNum();
+         if (season.searchSeasonDB(PhoneNum)) {
+            season.deleteSeason(PhoneNum);
+            cout << "í‡´ì‹¤ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
+         }
+         else {
+            cout << "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” íšŒì›ì…ë‹ˆë‹¤." << endl;
+         }
+         //season.writeFile();
+         continue;
+      }
+
+      else if (menu.compare("4") == 0) {                           // [4] íšŒì›í™•ì¸
+         string PhoneNum = personDB.inputPhoneNum();
+         //[ 2022-09-28 16:15:54 ] êµ¬ë³¸ë¬´ ê³ ê°ë‹˜ / ë‹¨ì¼ê¶Œ 2ì‹œê°„ 34ë¶„ ë‚¨ì•˜ìŠµë‹ˆë‹¤.
+         personDB.showPersonInfo(PhoneNum, currentTime);
+         continue;
+      }
+
+
+
+      else if (menu.compare("5") == 0) {                           // [5] ìë¦¬í™•ì¸
+         seat.showSeat();
+         continue;
+      }
+      else if (menu.compare("6") == 0) {                           // [6] ì¢Œì„ì´ë™
+
+         string PhoneNum = personDB.inputPhoneNum();
+         Person* targetPerson = personDB.searchPerson(PhoneNum);
+         while (targetPerson == NULL) {
+            cout << "ì „í™”ë²ˆí˜¸ ì…ë ¥ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n";
+            personDB.inputPhoneNum();
+            targetPerson = personDB.searchPerson(PhoneNum);
+         }
+
+         if (targetPerson->Seat.compare("1") == 0) {   //ì •ê¸°ê¶Œ (ì§€ì •ì„) íšŒì›
+            season.ChangeSeat_1(PhoneNum, targetPerson);
+         }
+         else if (targetPerson->Seat.compare("2") == 0) {   //ì •ê¸°ê¶Œ (ììœ ì„) íšŒì›
+            season.ChangeSeat_2(PhoneNum, targetPerson);
+         }
+         else if (targetPerson->Seat.compare("3") == 0) {
+            oneday.ChangeSeat_3(PhoneNum, targetPerson);
+         }
+
+      }
+      else if (menu.compare("7") == 0) {                           // [7] íšŒ    ê³„
+         cout << "[";
+         time.showTime();
+         cout << "]\n";
+         account.showAccount();
+         continue;
+      }
+      else if (menu.compare("Q") != 0) {
+         cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤." << endl;
+      }
+   } while (menu != "Q");                                       // [Q] ì¢…    ë£Œ
+
+
+   // íŒŒì¼ì“°ê¸°
+   cout << "Account" << endl;
+   account.writeDB();
+   cout << "time" << endl;
+   time.writeData();
+   cout << "time" << endl;
+   personDB.writeFile();
+   cout << "personDB" << endl;
+   season.writeFile();
+   cout << "seasonDB" << endl;
+   oneday.writeFile();
+   cout << "íŒŒì¼ ì €ì¥ ì™„ë£Œ" << endl;
+
+   return 0;
 
 }
