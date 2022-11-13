@@ -63,21 +63,16 @@ void SeatDB::showSeat()
 	cout << endl;
 }
 
-// 0~29 인덱스를 "A1"로 변경
-string SeatDB::idxToString(int idx)
-{
-	string c1;
-	if (idx % 10 == 0) {
-		c1 = char('A' + idx / 10);
-	}
-	string c2 = toChar(seat[idx]);
-	return string();
-}
-
 // 좌석선택 함수
 int SeatDB::chooseSeat(int memType)
 {
 	readFile();
+
+	if(ifFull()){ // 좌석DB 빈자리 탐색
+		cout << "\n좌석이 모두 사용중으로 메인화면으로 이동합니다." << endl;
+		return -1;
+	}
+
 	string chooseS;	// 사용자입력(ex: A3, C10)
 	do {
 		cout << "\n[           좌석선택          ]" << endl;
@@ -96,7 +91,12 @@ int SeatDB::chooseSeat(int memType)
 // 좌석DB 안이 빈자리(0) 없이 꽉 차있는지
 bool SeatDB::ifFull()
 {
-	return false;
+	for (int i = 0; i < SEAT_MAX; i++) {
+		if(seat[i].compare("0")==0){
+			return false;
+		}
+	}	
+	return true;
 }
 
 // 좌석선택 input검사 함수
@@ -181,4 +181,12 @@ string SeatDB::toChar(string seat)
 	else {
 		return "??";
 	}
+}
+
+// 0~29 인덱스를 "A1"로 변경
+string SeatDB::idxToString(int idx)
+{
+	char c1 = char('A' + (idx / 10));
+	string c2 = to_string((idx % 10) + 1);
+	return c1 + c2;
 }

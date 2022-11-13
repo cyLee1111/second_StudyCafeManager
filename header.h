@@ -29,13 +29,13 @@ public:
 	bool readFile();
 	bool writeFile();
 	void showSeat();						/* showSeat() : 현재좌석상태 보여주는 함수 */
-    string idxToString(int idx);            /* idxToString() : 0~29 인덱스를 "A1"로 변경 */
 	int chooseSeat(int memType);			/* chooSeat() : 좌석선택 함수 */
     bool ifFull();                          /* ifFull() : 좌석DB 안이 빈자리(0) 없이 꽉 차있는지 */
 	int checkInput(string s);				/* checkInput() : 좌석선택 input검사 함수 */
 	bool fixSeat(int memType, int idx);		/* fixSeat() : 선택받은 좌석수정 */
 	bool delSeat(int idx);					/* delSeat() : 선택받은 좌석삭제 */
 	string toChar(string seat);				/* toChar() : 0,1,2 숫자를 '□','▦','■'로 바꿔줌 */
+    string idxToString(int idx);            /* idxToString() : 0~29 인덱스를 "A1"로 변경 */
 
 };
 
@@ -131,18 +131,19 @@ class SeasonDB
         
         bool readFile();	
         bool writeFile();
+
         //회원가입
         void signup(string phone_num,string payment_date,string expert_date,string seat_num,string arrival_date,string depart_date);
-        
         void AddNode(Season _Season);	//노드를 연결리스트에 추가하는 함수
-        void printData();
         bool deleteSeason(string phonenum);    
+
         void ReEntrance(string phonenum,string current_time);  //재입장
-        void ReEntranceNseat(string phonenum,int seatnum,string current_time);
+        void ReEntranceNseat(string phonenum,int seatnum,string current_time);  //재입장 자리선택 필요한경우
         int searchSeasonDB(string phonenum);	//전번 있으면 true
-        int searchSeasonDB_time(string current_time);
+        int searchSeasonDB_time(string current_time);   //시간보고 회원 삭제
         int searchSeasonDB_retseatIdx(string PhoneNum); //좌석이 없는경우 찬양한테 자리넘버넘겨줘
-        
+        void ChangeSeat_1(string phone_num,Person person); //정기권(지정석) 자리 이동
+        void ChangeSeat_2(string phone_num,Person person) ; //정기권(자유석) 자리 이동
     private:
         int cntSize = 0;
 };
@@ -186,9 +187,6 @@ public:
     void showPersonInfo(string PhoneNum,string currentTime);
     void getTime(string currentTime);
     //만료고객 삭제
-        // 자정 지나고 단일권 삭제
-    void deleteOneday(string time);
-        //만료시간 지난 사람 삭제
     Person* deleteEndPerson(string time);
     //File I/O
     bool readFile();

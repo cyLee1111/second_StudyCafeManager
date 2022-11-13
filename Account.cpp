@@ -78,8 +78,8 @@ string Account::int2string(int I)
 string Account::payTicket(string seat)
 {
 	int num, price = 0;
-//	int fY, fM, fD, fH, fmin;
 	int hour, day;
+	Time t; // 날짜계산을 위한
 
 
 //날짜
@@ -124,75 +124,12 @@ string Account::payTicket(string seat)
 		}
 
 		if (choice == 1) {
-			day = 7; price = 70;
-			if (24 <= D) {
-				if (M == 12) {
-					cout << price << "원 결제합니다. (Enter)\n";
-					checkEnter();
-					Saccount+=price ;
-					return to_string(Y + 1) + to_string(01) + int2string((D + 6) - 30) + "2359";
-				}
-				else {
-					cout << price << "원 결제합니다. (Enter)\n";
-					checkEnter();
-					Saccount+=price ;
-					return to_string(Y) + int2string(M + 1) + int2string((D + 6) - 30) + "2359";
-				}
-			}
-			else {
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Saccount+=price ;
-				return to_string(Y) + int2string(M) + int2string(D + 6) + "2359";
-			}
-		}
+	
 		else if (choice == 2) {
-			day = 14; price = 140;
-			if (17 <= D) {
-				if (M == 12) {
-					cout << price << "원 결제합니다. (Enter)\n";
-					checkEnter();
-					Saccount+=price ;
-					return to_string(Y + 1) + to_string(01) + int2string((D + 13) - 30) + "2359";
-				}
-				else {
-					cout << price << "원 결제합니다. (Enter)\n";
-					checkEnter();
-					Saccount+=price ;
-					return to_string(Y) + int2string(M + 1) + int2string((D + 13) - 30) + "2359";
-				}
-			}
-			else {
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Saccount+=price ;
-				return to_string(Y) + int2string(M) + int2string(D + 13) + "2359";
-			}
+	
 		}
 		else if (choice == 3) {
-			day = 28; price = 280;
-			if (3 <= D) {
-				if (M == 12) {
-					cout << price << "원 결제합니다. (Enter)\n";
-					checkEnter();
-					Saccount+=price ;
-					return to_string(Y + 1) + to_string(01) + int2string((D + 27) - 30) + "2359";
-				}
-				else {
-					cout << price << "원 결제합니다. (Enter)\n";
-					checkEnter();
-					Saccount+=price ;
-					return to_string(Y) + int2string(M + 1) + int2string((D + 27) - 30) + "2359";
-				}
-			}
-			else {
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Saccount+=price ;
-				return to_string(Y) + int2string(M) + int2string(D + 27) + "2359";
-			}
-		}
-
+	
 
 	}
 	else if (num == 3) {  //단일권
@@ -206,42 +143,13 @@ string Account::payTicket(string seat)
 		cin.clear();
 
 		if (choice == 1) {
-			hour = 8; price = 8;
-			if (H >= 16) {
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Oaccount += price;
-				return to_string(Y) + int2string(M) + int2string(D) + "2359";
-			}
-			else {
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Oaccount += price;
-				return to_string(Y) + int2string(M) + int2string(D) + int2string(H + hour) + int2string(min);
-			}
+
 		}
 		else if (choice == 2) {
-			hour = 16; price = 16;
-			if (H >= 8) { 
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Oaccount += price;
-				return to_string(Y) + int2string(M) + int2string(D) + "2359"; 
-			}
-			else {
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				Oaccount += price;
-				return to_string(Y) + int2string(M) + int2string(D) + int2string(H + hour) + int2string(min);
-			}
+			
 		}
 		else if (choice == 3) {
-			hour = 24; price = 24;
-			cout << price << "원 결제합니다. (Enter)\n";
-			checkEnter();
-			Oaccount += price;
-			return to_string(Y) + int2string(M) + int2string(D) + "2359";
-		}
+			
 	}
 
 	return "0";

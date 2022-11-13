@@ -67,20 +67,20 @@ Person* PersonDB::searchPerson(string phonenum){
     cout<<"없는 회원입니다."<<endl;
     return NULL;
 };
-void PersonDB::deleteOneday(string time){
-    //자정이 지난 단일권 고객 삭제
-    Person* current=startPoint;
-    // while(currentIndex!=size){
-    while(current!=nullptr){
-        if(strncmp(current->Seat.c_str(),"3",1)==0){
-            deletePerson(current->PhoneNum);
-            current=current->next;
-        }
-        else {
-            current=current->next;
-        }
-    }
-};
+// void PersonDB::deleteOneday(string time){
+//     //자정이 지난 단일권 고객 삭제
+//     Person* current=startPoint;
+//     // while(currentIndex!=size){
+//     while(current!=nullptr){
+//         if(strncmp(current->Seat.c_str(),"3",1)==0){
+//             deletePerson(current->PhoneNum);
+//             current=current->next;
+//         }
+//         else {
+//             current=current->next;
+//         }
+//     }
+// };
 Person* PersonDB::deleteEndPerson(string curtime){
 //  cout<<"PersonDB삭제 시작"<<endl;
     Person* current=startPoint;

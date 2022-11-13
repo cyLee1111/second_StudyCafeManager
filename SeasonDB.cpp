@@ -206,7 +206,26 @@ int SeasonDB::searchSeasonDB_time(string current_time)
 	}
 	return -1;
 }
-
+//정기권 지정석 좌석 이동
+void SeasonDB::ChangeSeat_1(string phone_num,ㅔ){
+	Season* temp = start;
+	int nodeIndex=searchOnedayDB(phonenum)-1;
+	
+	for (int i = 0; i < nodeIndex - 1; i++)
+	{
+		temp = temp->next;
+	}
+	int seat1 = temp->DB_seat_num;
+	string seat_str = seat.idxToString(current->DB_seat_num);
+	cout << person->Name <<"님 현재 "<<seat_str<<" 좌석 이용중입니다.";
+ 	int seat2 = seat.chooseSeat(3);
+	if(seat2==-1){
+		return;
+	}
+//원래자리 삭제
+seat.delSeat(seat1);
+ temp ->DB_seat_num = to_string(seat2);
+}
 bool SeasonDB::readFile()
 {
 	string path = "season.txt";

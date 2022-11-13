@@ -51,14 +51,20 @@ int main()
 		seat.delSeat(oneday.searchOnedayDB_time(currentTime));
 		cin.clear();
 		cout << endl;
-		cout << "┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────┐" << endl;
-		cout << "│ [1] 회원입장 │ │ [2] 회원퇴실 │ │ [3] 회원확인 │ │ [4] 회    계 │ │ [5] 좌석확인 │ │ 종료: Q│" << endl;
-		cout << "└──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └────────┘" << endl;
+		cout << "┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────┐" << endl;
+		cout << "│ [1] 회원가입 │ │ [2] 회원입장 │ │ [3] 회원퇴실 │ │ [4] 회원확인 │ │ [5] 좌석확인 │ │ [6] 좌석확인 │ │ [7] 회   계  │ │ 종료: Q│" << endl;
+		cout << "└──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └────────┘" << endl;
 		cout<<">> ";
 		cin >> menu;
 		cin.clear();
-
-		if (menu.compare("1") == 0) {									// [1] 회원입장
+		if(menu.compare("1") == 0){											// [1]: 회원가입
+			while (!personDB.signup(currentTime,account););
+			//회원 가입 완료 
+			continue;
+			//다시 시작 메뉴로
+			
+		}
+		else if (menu.compare("2") == 0) {									// [2] 회원입장
 			string PhoneNum = personDB.inputPhoneNum();
 			Person* targetPerson = personDB.searchPerson(PhoneNum);
 			if (targetPerson == NULL) {	// 전화번호X, 회원가입
@@ -107,7 +113,7 @@ int main()
 			continue;
 		}
 
-		else if (menu.compare("2") == 0) {								// [2] 회원퇴실
+		else if (menu.compare("3") == 0) {								// [3] 회원퇴실
 			bool ft;
 			string PhoneNum = personDB.inputPhoneNum();
 			if (season.searchSeasonDB(PhoneNum)) {
@@ -121,23 +127,39 @@ int main()
 			continue;
 		}
 
-		else if (menu.compare("3") == 0) {								// [3] 회원확인
+		else if (menu.compare("4") == 0) {								// [4] 회원확인
 			string PhoneNum = personDB.inputPhoneNum();
 			//[ 2022-09-28 16:15:54 ] 구본무 고객님 / 단일권 2시간 34분 남았습니다.
 			personDB.showPersonInfo(PhoneNum, currentTime);
 			continue;
 		}
 
-		else if (menu.compare("4") == 0) {								// [4] 회    계
+		
+
+		else if (menu.compare("5") == 0) {								// [5] 자리확인
+			seat.showSeat();
+			continue;
+		}
+		else if (menu.compare("6") == 0){
+			
+			string PhoneNum = personDB.inputPhoneNum();
+			Person* targetPerson = personDB.searchPerson(PhoneNum);
+			while(targetPerson == NULL){
+				cout <<"전화번호 입력이 잘못되었습니다. 다시 입력해주세요.\n";
+				personDB.inputPhoneNum();
+				targetPerson = personDB.searchPerson(PhoneNum);
+			}
+			
+			if (targetPerson->Seat.compare("1")==0) {	//정기권 (지정석) 회원
+				
+			}
+			
+		}
+		else if (menu.compare(7"") == 0) {								// [7] 회    계
 			cout << "[";
 			time.showTime();
 			cout << "]\n";
 			account.showAccount();
-			continue;
-		}
-
-		else if (menu.compare("5") == 0) {								// [5] 자리확인
-			seat.showSeat();
 			continue;
 		}
 		else if (menu.compare("Q") != 0) {
