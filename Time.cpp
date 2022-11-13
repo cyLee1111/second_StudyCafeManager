@@ -119,8 +119,8 @@ void Time::insertTime()//시간입력함수
 		
 		string strDate;
 		strDate=to_string(inputDate);
-		if(strDate.length()!=12){
-			cout<<"12 글자를 입력하셔야합니다."<<endl;
+		if(strDate.length()!=8){
+			cout<<"8글자를 입력하셔야합니다."<<endl;
 			continue;
 		}
 		for(int i=0;i<12;i++){
