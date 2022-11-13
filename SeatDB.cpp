@@ -63,6 +63,17 @@ void SeatDB::showSeat()
 	cout << endl;
 }
 
+// 0~29 인덱스를 "A1"로 변경
+string SeatDB::idxToString(int idx)
+{
+	string c1;
+	if (idx % 10 == 0) {
+		c1 = char('A' + idx / 10);
+	}
+	string c2 = toChar(seat[idx]);
+	return string();
+}
+
 // 좌석선택 함수
 int SeatDB::chooseSeat(int memType)
 {
@@ -80,6 +91,12 @@ int SeatDB::chooseSeat(int memType)
 
 	return chooseIdx;
 
+}
+
+// 좌석DB 안이 빈자리(0) 없이 꽉 차있는지
+bool SeatDB::ifFull()
+{
+	return false;
 }
 
 // 좌석선택 input검사 함수

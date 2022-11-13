@@ -29,7 +29,9 @@ public:
 	bool readFile();
 	bool writeFile();
 	void showSeat();						/* showSeat() : 현재좌석상태 보여주는 함수 */
+    string idxToString(int idx);            /* idxToString() : 0~29 인덱스를 "A1"로 변경 */
 	int chooseSeat(int memType);			/* chooSeat() : 좌석선택 함수 */
+    bool ifFull();                          /* ifFull() : 좌석DB 안이 빈자리(0) 없이 꽉 차있는지 */
 	int checkInput(string s);				/* checkInput() : 좌석선택 input검사 함수 */
 	bool fixSeat(int memType, int idx);		/* fixSeat() : 선택받은 좌석수정 */
 	bool delSeat(int idx);					/* delSeat() : 선택받은 좌석삭제 */
@@ -50,12 +52,9 @@ class Time {
         string int2string(int I);
         string returnTime();
         void writeData();
-        //bool setTime();
-        //string getTime();
-        //string toString();
-        //string getEndTime();
-        //bool checkTime(string inputTime);;
+        int checkDate(int year, int month, int day);
 };
+
 class Account {
     public:
         int totalAccount,Saccount,Oaccount;
@@ -190,7 +189,7 @@ public:
         // 자정 지나고 단일권 삭제
     void deleteOneday(string time);
         //만료시간 지난 사람 삭제
-    void deleteEndPerson(string time);
+    Person* deleteEndPerson(string time);
     //File I/O
     bool readFile();
     bool writeFile();

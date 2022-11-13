@@ -31,11 +31,23 @@ int main()
 		
 		time.showTime();
 		cout<<"정기권 만료 회원이 있다면 삭제합니다..."<<endl;
+		
 		seat.delSeat(season.searchSeasonDB_time(currentTime));
+	
+		// 출력
+		// Person* person;
+		// while(person=personDB.deleteEndPerson(currenttime)!=NULL){
+		// 	seat.delSeat(season.searchSeasonDB_time(currentTime,person));
+		// }
 		
 		
 		time.showTime();
 		cout<<"단일권 만료 회원이 있다면 삭제합니다..."<<endl;
+		// 출력
+		// Person* person;
+		// while(person=personDB.deleteEndPerson(currenttime)!=NULL){
+		// 	seat.delSeat(oneday.searchSeasonDB_time(currentTime,person));
+		// }
 		seat.delSeat(oneday.searchOnedayDB_time(currentTime));
 		cin.clear();
 		cout << endl;

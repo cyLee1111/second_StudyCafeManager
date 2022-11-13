@@ -56,6 +56,48 @@ void Time::writeData()
 	return;
 }
 
+int Time::checkDate(int year, int month, int day)
+{
+	   /* return 값 의미
+	   0 성공
+	   1 31일이 없어요
+	   2 2월 29은 없어요(!윤달)
+	   3.2월 30,31은 없어요 (윤달)
+	   */
+		if ((month % 2 == 1)) //odd month 
+		{
+			if (month <= 7) {
+				//if (day <= 0 || day > 31) return 0;
+			}else { // month > 7 
+				if (day <= 0 || day > 30) return 1;
+			}
+		}
+		else //even month
+		{
+			if (month <= 6) {
+				if (month == 2)
+				{
+					if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) // leap year
+					{
+						if (day <= 0 || day > 29) return 3;
+					}
+					else if(day <= 0 || day > 28){ //윤달이 아닐때
+						
+						return 2; 
+					}
+
+				}
+				if (day <= 0 || day > 30) return 1;  
+			}
+			//else { // month > 6
+
+				//if (day <= 0 || day > 31) return 0;
+			//}
+		}
+
+		return 0; //성공
+}
+
 void Time::insertTime()//시간입력함수
 {
 	// 이전시간 기록
@@ -64,6 +106,8 @@ void Time::insertTime()//시간입력함수
 	cout << bY << "-" << int2string(bM) << "-" << int2string(bD)
 		<< "  " << int2string(bH) << ":" << int2string(bmin) << ")\n";
 	int inputDate;
+
+
 	// 예외처리
 	while(1){
 		cout << "\n현재 날짜는 몇 년 몇 월 며칠입니까?(ex:20221201): \n>> ";
@@ -80,8 +124,10 @@ void Time::insertTime()//시간입력함수
 			continue;
 		}if (M < 0 || M>12) {
 			cout << "**'월'은 0~12 내에서 입력해주세요\n"; continue;
-		}if (D < 0 || D>30) {
-			cout << "**'일'은 0~30 내에서 입력해주세요\n"; continue;
+		}if (D < 0 || D>31) {
+			cout << "**'일'은 0~31 내에서 입력해주세요\n"; continue;
+		}if (checkDate(Y, M, D) != 0) {
+			cout<<"** 없는 날짜입니다. 다시 입력해주세요\n"; continue;
 		}
 		break; 
 	}

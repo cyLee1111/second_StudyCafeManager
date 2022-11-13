@@ -81,17 +81,19 @@ void PersonDB::deleteOneday(string time){
         }
     }
 };
-void PersonDB::deleteEndPerson(string curtime){
+Person* PersonDB::deleteEndPerson(string curtime){
 //  cout<<"PersonDB삭제 시작"<<endl;
     Person* current=startPoint;
     if(current==NULL||current->PhoneNum==""){
-        return;
+        return NULL;
     }
     // while(currentIndex!=size){    
     while(current!=NULL&&current->PhoneNum!=""){
         if(stod(current->endDate)<stod(curtime)){
-            // cout<<"TEST:personDB"<<current->PhoneNum<<endl;
+            
+            // Person* temp=current;
             deletePerson(current->PhoneNum);
+            // return temp;
             current = current->next;
         }
         else {
@@ -99,6 +101,7 @@ void PersonDB::deleteEndPerson(string curtime){
         }
     }
     cout<<"PersonDB삭제끝"<<endl;
+    return current;
 };
 
 void PersonDB::showPersonInfo(string phonenum,string currentTime){
