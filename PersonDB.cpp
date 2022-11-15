@@ -388,7 +388,7 @@ bool PersonDB::checkName(string Name) {
     // 올바른 입력 : 구본무 구본 구 ㄱ ㅡ 다 ok
     // 5글자 이하면 다 ok. 
     int strlen = Name.length();
-    if (Name.length() > 15) {
+    if (strlen > 10) {
         cout << "이름은 5자 이하여야 합니다." << endl;
         return false;
     }
@@ -425,8 +425,8 @@ string PersonDB::inputName() {
     do {
         cout << "\n회원의 이름을 입력하세요(최대5자):" << endl;
         cout << ">> ";
-        cin<<Name;
-        // getline(cin, Name);
+        //cin>>Name;
+        getline(cin, Name);
         cin.clear();
     } while (!checkName(Name));
     cin.clear();
