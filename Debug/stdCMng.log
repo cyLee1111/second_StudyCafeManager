@@ -1,14 +1,3 @@
-﻿  Account.cpp
-  main.cpp
-C:\Users\LEE CHAN YANG\source\KU_comPrj\stdCMng\stdCMng\main.cpp(99,9): warning C4101: 'ft' :참조되지 않은 지역 변수입니다.
-  OnedayDB.cpp
-C:\Users\LEE CHAN YANG\source\KU_comPrj\stdCMng\stdCMng\OnedayDB.cpp(302,20): warning C4101: 'e' :참조되지 않은 지역 변수입니다.
-  PersonDB.cpp
-C:\Users\LEE CHAN YANG\source\KU_comPrj\stdCMng\stdCMng\PersonDB.cpp(243,23): warning C4101: 'e' :참조되지 않은 지역 변수입니다.
-  SeasonDB.cpp
-C:\Users\LEE CHAN YANG\source\KU_comPrj\stdCMng\stdCMng\SeasonDB.cpp(298,20): warning C4101: 'e' :참조되지 않은 지역 변수입니다.
-  SeatDB.cpp
-C:\Users\LEE CHAN YANG\source\KU_comPrj\stdCMng\stdCMng\SeatDB.cpp(40,20): warning C4101: 'e' :참조되지 않은 지역 변수입니다.
-  Time.cpp
-  코드를 생성하고 있습니다...
-  stdCMng.vcxproj -> C:\Users\LEE CHAN YANG\source\KU_comPrj\stdCMng\Debug\stdCMng.exe
+﻿  PersonDB.cpp
+C:\Users\rnqhs\Documents\카카오톡 받은 파일\stdCMng_B12\stdCMng\PersonDB.cpp(254,23): warning C4101: 'e' :참조되지 않은 지역 변수입니다.
+  stdCMng.vcxproj -> C:\Users\rnqhs\Documents\카카오톡 받은 파일\stdCMng_B12\Debug\stdCMng.exe

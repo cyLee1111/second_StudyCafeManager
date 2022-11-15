@@ -7,7 +7,7 @@ PersonDB::PersonDB(SeasonDB Season, OnedayDB Oneday, SeatDB Seat, Account accoun
     seasonDB = Season;
     onedayDB = Oneday;
     seatDB = Seat;
-    account = account;
+    this->account = account;
 
 }
 
@@ -414,7 +414,7 @@ string PersonDB::inputPhoneNum() {
     do {
         cout << "\n회원의 전화번호를 입력하세요(-없이):" << endl;
         cout << ">> ";
-        cin >> PhoneNum;
+        getline(cin, PhoneNum);
         cin.clear();
     } while (!checkPhoneNum(PhoneNum));
     cin.clear();
@@ -425,7 +425,8 @@ string PersonDB::inputName() {
     do {
         cout << "\n회원의 이름을 입력하세요(최대5자):" << endl;
         cout << ">> ";
-        cin >> Name;
+        cin<<Name;
+        // getline(cin, Name);
         cin.clear();
     } while (!checkName(Name));
     cin.clear();

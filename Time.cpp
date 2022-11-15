@@ -101,8 +101,6 @@ int Time::checkDate(int year, int month, int day)
 
 void Time::insertTime()//시간입력함수
 {
-
-
 	// 이전시간 기록
 	cout << "\n\n******************************" << endl;
 	cout << "마지막 날짜(";
@@ -139,7 +137,6 @@ void Time::insertTime()//시간입력함수
 			continue;
 		}if (1900 > Y || Y > 2999) {
 			cout << "** 다시입력하세요.\n" << endl; continue;
-			continue;
 		}if (M < 0 || M>12) {
 			cout << "**'월'은 0~12 내에서 입력해주세요\n"; continue;
 		}if (D < 0 || D>31) {
