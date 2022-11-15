@@ -402,6 +402,9 @@ bool PersonDB::checkName(string Name) {
     return true;
 };
 bool PersonDB::checkSeat(string Seat) {
+    if(Seat.length()>1){
+        cout<<"올바른 값을 입력하세요"<<endl;
+    }
     if (strncmp(Seat.c_str(), "3", 1) == 0 || strncmp(Seat.c_str(), "2", 1) == 0 || strncmp(Seat.c_str(), "1", 1) == 0) {
         return true;
     }
@@ -415,6 +418,7 @@ string PersonDB::inputPhoneNum() {
         cout << "\n회원의 전화번호를 입력하세요(-없이):" << endl;
         cout << ">> ";
         cin >> PhoneNum;
+        cin.clear();
     } while (!checkPhoneNum(PhoneNum));
     cin.clear();
     return PhoneNum;
@@ -437,7 +441,7 @@ string PersonDB::inputSeat() {
         cout << "2. 정기권 - 자유석" << endl;
         cout << "3. 단일권 - 자유석" << endl;
         cout << ">> ";
-        cin >> Seat;
+        getline(cin,Seat);
     } while (!checkSeat(Seat));
     cin.clear();
     return Seat;
