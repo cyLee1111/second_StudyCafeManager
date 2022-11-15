@@ -134,7 +134,7 @@ int main()
 
 
 
-		else if (menu.compare("5") == 0) {									// [5] 자리확인
+		else if (menu.compare("5") == 0) {									// [5] 좌석확인
 			seat.showSeat();
 			continue;
 		}
@@ -160,9 +160,9 @@ int main()
 
 		}
 		else if (menu.compare("7") == 0) {									// [7] 회    계
-			cout << "[";
+		
 			time.showTime();
-			cout << "]\n";
+		
 			account.showAccount();
 			continue;
 		}
