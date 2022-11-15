@@ -286,10 +286,12 @@ bool PersonDB::signup(string currentTime, Account* inaccount) {
         //지금 자리없고 이따 필요할때
 
         seasonDB.signup(PhoneNum, currentTime, endTime, "-1", "0", "0");
-    }
-    else {
+    }else if (strncmp(inseat.c_str(), "3", 1) == 0) {
         onedayDB.signup(PhoneNum, currentTime, endTime, "-1", "0", "0");
 
+    }
+    else {
+        return false;
     }
     cout << "회원가입이 완료되었습니다." << endl;
     return true;
@@ -326,9 +328,12 @@ bool PersonDB::signup(string PhoneNum, string currentTime, Account* inaccount) {
 
         seasonDB.signup(PhoneNum, currentTime, endTime, "-1", "0", "0");
     }
-    else {
+    else if (strncmp(inseat.c_str(), "3", 1) == 0) {
         onedayDB.signup(PhoneNum, currentTime, endTime, "-1", "0", "0");
 
+    }
+    else {
+        return false;
     }
     cout << "회원가입이 완료되었습니다." << endl;
     return true;
