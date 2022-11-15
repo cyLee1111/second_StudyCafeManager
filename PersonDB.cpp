@@ -402,9 +402,6 @@ bool PersonDB::checkName(string Name) {
     return true;
 };
 bool PersonDB::checkSeat(string Seat) {
-    if(Seat.length()>1){
-        cout<<"올바른 값을 입력하세요"<<endl;
-    }
     if (strncmp(Seat.c_str(), "3", 1) == 0 || strncmp(Seat.c_str(), "2", 1) == 0 || strncmp(Seat.c_str(), "1", 1) == 0) {
         return true;
     }
@@ -429,6 +426,7 @@ string PersonDB::inputName() {
         cout << "\n회원의 이름을 입력하세요(최대5자):" << endl;
         cout << ">> ";
         cin >> Name;
+        cin.clear();
     } while (!checkName(Name));
     cin.clear();
     return Name;
@@ -442,6 +440,7 @@ string PersonDB::inputSeat() {
         cout << "3. 단일권 - 자유석" << endl;
         cout << ">> ";
         getline(cin,Seat);
+        cin.clear();
     } while (!checkSeat(Seat));
     cin.clear();
     return Seat;
