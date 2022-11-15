@@ -114,10 +114,10 @@ void Time::insertTime()//시간입력함수
 	// 2) input 이 다 숫자인지
 	// 예외처리
 	while (1) {
-label1:
+	label1:
 		string strDate;
 		cout << "\n현재 날짜는 몇 년 몇 월 며칠입니까?(ex:20221201): \n>> ";
-		getline(cin,strDate);
+		getline(cin, strDate);
 		cin.clear();
 		if (strDate.length() != 8) {
 			cout << "8글자를 입력하셔야합니다." << endl;
@@ -129,7 +129,7 @@ label1:
 				goto label1;
 			}
 		}
-		inputDate=stoi(strDate);
+		inputDate = stoi(strDate);
 		Y = inputDate / 10000;
 		M = (inputDate % 10000) / 100;
 		D = (inputDate % 10000) % 100;
@@ -157,21 +157,21 @@ label1:
 	cin.clear();
 
 	while (1) {
-label2:
+	label2:
 		string strTime;
 		cout << "현재 시간은 몇 시 몇 분 입니까?(ex1:0959 ex2:1701): \n>> ";
-		getline(cin,strTime);
+		getline(cin, strTime);
 		cin.clear();
 		if (strTime.length() != 4) {
 			cout << "4글자를 입력하셔야합니다." << endl;
 			goto label2;
 		}
-		 for (int i = 0; i < 4; i++) {
-		 	if (strTime[i] < '0' || strTime[i]>'9') {
-		 		cout << "숫자만 입력하세요" << endl;
-		 		goto label2;
-		 	}
-		 }
+		for (int i = 0; i < 4; i++) {
+			if (strTime[i] < '0' || strTime[i]>'9') {
+				cout << "숫자만 입력하세요" << endl;
+				goto label2;
+			}
+		}
 
 		Time = stoi(strTime);
 		H = Time / 100;

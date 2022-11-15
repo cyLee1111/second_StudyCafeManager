@@ -8,9 +8,9 @@ int main()
 	SeatDB seat;
 	Account account;
 	Time time;
-	PersonDB personDB(season, oneday, seat, account); //person ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ class ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
+	PersonDB personDB(season, oneday, seat, account); //person »ý¼ºÀÚ ÃÊ±âÈ­½Ã ÀÌ¹Ì »ý¼ºµÈ class Àü´ÞÇØ¾ß µÊ
 	personDB.initLinkedList();
-	// ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+	// ÆÄÀÏÀÐ±â
 	account.readDB();
 	time.readData();
 	season.readFile();
@@ -18,22 +18,22 @@ int main()
 	personDB.readFile();
 	string menu;
 	do {
-		// ï¿½Ã°ï¿½ï¿½Ô·ï¿½ï¿½Ï±ï¿½ï¿½Ô¼ï¿½
+		// ½Ã°£ÀÔ·ÂÇÏ±âÇÔ¼ö
 		time.insertTime();
-		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+		//ÇöÀç ½Ã°£
 		string currentTime = time.returnTime();
-		//ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+		//°´Ã¼ º° ½Ã°£ ¾÷µ¥ÀÌÆ®
 		account.whatTime(currentTime);
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//¸¸·áµÈ È¸¿øÀ» DB¿¡¼­ »èÁ¦
 		//personDB.deleteOneday(currentTime);
 
 		//personDB.deleteEndPerson(currentTime);
 
 		time.showTime();
-		cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½..." << endl;
+		cout << "Á¤±â±Ç ¸¸·á È¸¿øÀÌ ÀÖ´Ù¸é »èÁ¦ÇÕ´Ï´Ù..." << endl;
 
 
-		// ï¿½ï¿½ï¿½
+		// Ãâ·Â
 		 Person* person;
 		 while((person=personDB.deleteEndPerson(currentTime))!=NULL){
 		 	seat.delSeat(season.searchSeasonDB_time(currentTime,person));
@@ -41,117 +41,127 @@ int main()
 
 
 		time.showTime();
-		cout << "ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½..." << endl;
-		 //ï¿½ï¿½ï¿½
+		cout << "´ÜÀÏ±Ç ¸¸·á È¸¿øÀÌ ÀÖ´Ù¸é »èÁ¦ÇÕ´Ï´Ù..." << endl;
+		 //Ãâ·Â
 		 while((person=personDB.deleteEndPerson(currentTime))!=NULL){
 		 	seat.delSeat(oneday.searchOnedayDB_time(currentTime,person));
 		 }
 		
 		cin.clear();
 		cout << endl;
-		cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
-		cout << "ï¿½ï¿½ [1] È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ [2] È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ [3] È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ [4] È¸ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ [5] ï¿½Â¼ï¿½È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ [6] ï¿½Â¼ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ [7] È¸    ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: Qï¿½ï¿½" << endl;
-		cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
+		cout << "¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤ ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤" << endl;
+		cout << "¦¢ [1] È¸¿ø°¡ÀÔ ¦¢ ¦¢ [2] È¸¿øÀÔÀå ¦¢ ¦¢ [3] È¸¿øÅð½Ç ¦¢ ¦¢ [4] È¸¿øÈ®ÀÎ ¦¢ ¦¢ [5] ÁÂ¼®È®ÀÎ ¦¢ ¦¢ [6] ÁÂ¼®ÀÌµ¿ ¦¢ ¦¢ [7] È¸    °è ¦¢ ¦¢ Á¾·á: Q¦¢" << endl;
+		cout << "¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥ ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥" << endl;
 		cout << ">> ";
 		cin >> menu;
 		cin.clear();
-		if (menu.compare("1") == 0) {											// [1] È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if (menu.compare("1") == 0) {											// [1] È¸¿ø°¡ÀÔ
 			personDB.signup(currentTime, &account);
-			//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ / È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//È¸¿ø °¡ÀÔ ¿Ï·á / È¤Àº ½ÇÆÐ
 			continue;
-			//ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½
+			//´Ù½Ã ½ÃÀÛ ¸Þ´º·Î
 
 		}
-		else if (menu.compare("2") == 0) {									// [2] È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		else if (menu.compare("2") == 0) {									// [2] È¸¿øÀÔÀå
 			string PhoneNum = personDB.inputPhoneNum();
 			Person* targetPerson = personDB.searchPerson(PhoneNum);
-			if (targetPerson == NULL) {	// ï¿½ï¿½È­ï¿½ï¿½È£X, È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			if (targetPerson == NULL) {	// ÀüÈ­¹øÈ£X, È¸¿ø°¡ÀÔ
 				personDB.signup(PhoneNum, currentTime, &account);
-				//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ / È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				//È¸¿ø °¡ÀÔ ¿Ï·á / È¤Àº ½ÇÆÐ
 				continue;
-				//ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½
+				//´Ù½Ã ½ÃÀÛ ¸Þ´º·Î
 			}
-			cout << "targetperson seat ï¿½ï¿½ï¿½" << targetPerson->Seat << endl;
-			if (targetPerson->Seat.compare("1") == 0) {	// ï¿½ï¿½È­ï¿½ï¿½È£O, ï¿½ï¿½ï¿½ï¿½
-				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)" << endl;				//ï¿½Ö¼ï¿½
+			cout << "targetperson seat Ãâ·Â" << targetPerson->Seat << endl;
+			if (targetPerson->Seat.compare("1") == 0) {	// ÀüÈ­¹øÈ£O, ÀÔÀå
+				cout << "Á¤±â±Ç (ÁöÁ¤¼®)" << endl;				//ÁÖ¼®
 				season.ReEntrance(PhoneNum, currentTime);
-				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½ ^^ (ï¿½ï¿½ï¿½ï¿½ï¿½)" << endl;
+				cout << "ÀÔÀåÀÔ´Ï´Ù ^^ (Á¤±â±Ç)" << endl;
 			}
 			else if (targetPerson->Seat.compare("2") == 0) {
-				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)" << endl;				//ï¿½Ö¼ï¿½
-				//ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+				cout << "Á¤±â±Ç (ÀÚÀ¯¼®)" << endl;				//ÁÖ¼®
+				//ÁÂ¼® ÀÖÀ½
 				if ((season.searchSeasonDB_retseatIdx(PhoneNum) > 0)) {
 					season.ReEntrance(PhoneNum, currentTime);
 				}
 				else {
-					//ï¿½Â¼ï¿½ x  - ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+					//ÁÂ¼® x  - ÁÂ¼® ¹èÁ¤
 					int seatnum = seat.chooseSeat(2);
 					season.ReEntranceNseat(PhoneNum, seatnum, currentTime);
 				}
-				//ï¿½ï¿½ï¿½ï¿½
-				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½ ^^ (ï¿½ï¿½ï¿½ï¿½ï¿½)" << endl;
+				//ÀÔÀå
+				cout << "ÀÔÀåÀÔ´Ï´Ù ^^ (Á¤±â±Ç)" << endl;
 			}
 			else if (targetPerson->Seat.compare("3") == 0) {
-				cout << "ï¿½ï¿½ï¿½Ï±ï¿½" << endl;
-				//ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+				cout << "´ÜÀÏ±Ç" << endl;
+				//ÁÂ¼® ÀÖÀ½
 				if (oneday.searchOnedayDB_retseatIdx(PhoneNum) > 0) {
 					oneday.ReEntrance(PhoneNum, currentTime);
 				}
 				else {
-					//ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½
-					//ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+					//ÁÂ¼® ¾øÀ½
+					//ÁÂ¼® ¹èÁ¤
 					int seatnum = seat.chooseSeat(3);
 					oneday.ReEntranceNseat(PhoneNum, seatnum, currentTime);
 				}
-				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½ ^^ (ï¿½ï¿½ï¿½Ï±ï¿½)" << endl;
+				cout << "ÀÔÀåÀÔ´Ï´Ù ^^ (´ÜÀÏ±Ç)" << endl;
 			}
 			else {
-				cout << "ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½(ï¿½Ú¸ï¿½ï¿½ï¿½ 1 2 3 ï¿½ï¿½ ï¿½Æ´Õ´Ï´ï¿½.)" << endl;
+				cout << "Àß¸øµÈ ÀÔ·Â(ÀÚ¸®°¡ 1 2 3 ÀÌ ¾Æ´Õ´Ï´Ù.)" << endl;
 			}
 			continue;
 		}
-
-		else if (menu.compare("3") == 0) {									// [3] È¸ï¿½ï¿½ï¿½ï¿½ï¿½
+		
+		else if (menu.compare("3") == 0) {									// [3] È¸¿øÅð½Ç
 			bool ft;
+			cout << "È¸¿øÅð½Ç" << endl;
 			string PhoneNum = personDB.inputPhoneNum();
-			if (season.searchSeasonDB(PhoneNum)) {
-				season.deleteSeason(PhoneNum);
-				cout << "ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
+			if (season.searchSeasonDBforExit(PhoneNum)==1) {		//ÁÂ¼® ÀÖ´Â Á¤±â±Ç È¸¿øÀÌ Åð½ÇÀ» ¿øÇÏ´Â °æ¿ì 
+				season.exitSeason(PhoneNum);
+				cout << "Åð½Ç Ã³¸® µÇ¾ú½À´Ï´Ù." << endl;
+				
+			}
+			else if (season.searchSeasonDBforExit(PhoneNum) == 0) {	//ÁÂ¼® ¾ø´Â Á¤±â±Ç È¸¿øÀÌ Åð½ÇÀ» ¿øÇÏ´Â °æ¿ì
+				cout << "ÀÌ¿ëÁßÀÎ ÁÂ¼®ÀÌ ¾ø½À´Ï´Ù." << endl;
+			}
+			else if (oneday.searchOnedayDB(PhoneNum)) {				//´ÜÀÏ±Ç È¸¿øÀÌ Åð½ÇÀ» ¿øÇÏ´Â °æ¿ì
+				cout << "´ÜÀÏ±Ç È¸¿øÀº ÀÏÁ¤½Ã°£ÀÌ Áö³­ ÈÄ ÀÚµ¿ Åð½ÇÃ³¸®°¡ µË´Ï´Ù." << endl;
+				
 			}
 			else {
-				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ È¸ï¿½ï¿½ï¿½Ô´Ï´ï¿½." << endl;
+				cout << "Á¸ÀçÇÏÁö ¾Ê´Â È¸¿øÀÔ´Ï´Ù." << endl;
+				
 			}
 			//season.writeFile();
 			continue;
 		}
 
-		else if (menu.compare("4") == 0) {									// [4] È¸ï¿½ï¿½È®ï¿½ï¿½
+		else if (menu.compare("4") == 0) {									// [4] È¸¿øÈ®ÀÎ
 			string PhoneNum = personDB.inputPhoneNum();
-			//[ 2022-09-28 16:15:54 ] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½Ï±ï¿½ 2ï¿½Ã°ï¿½ 34ï¿½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ï¿½Ï´ï¿½.
+			//[ 2022-09-28 16:15:54 ] ±¸º»¹« °í°´´Ô / ´ÜÀÏ±Ç 2½Ã°£ 34ºÐ ³²¾Ò½À´Ï´Ù.
 			personDB.showPersonInfo(PhoneNum, currentTime);
 			continue;
 		}
 
 
 
-		else if (menu.compare("5") == 0) {									// [5] ï¿½Â¼ï¿½È®ï¿½ï¿½
+		else if (menu.compare("5") == 0) {									// [5] ÁÂ¼®È®ÀÎ
 			seat.showSeat();
 			continue;
 		}
-		else if (menu.compare("6") == 0) {									// [6] ï¿½Â¼ï¿½ï¿½Ìµï¿½
+		else if (menu.compare("6") == 0) {									// [6] ÁÂ¼®ÀÌµ¿
 
 			string PhoneNum = personDB.inputPhoneNum();
 			Person* targetPerson = personDB.searchPerson(PhoneNum);
 			while (targetPerson == NULL) {
-				cout << "ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ß¸ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.\n";
+				cout << "ÀüÈ­¹øÈ£ ÀÔ·ÂÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n";
 				personDB.inputPhoneNum();
 				targetPerson = personDB.searchPerson(PhoneNum);
 			}
 
-			if (targetPerson->Seat.compare("1") == 0) {	//ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) È¸ï¿½ï¿½
+			if (targetPerson->Seat.compare("1") == 0) {	//Á¤±â±Ç (ÁöÁ¤¼®) È¸¿ø
 				season.ChangeSeat_1(PhoneNum, targetPerson);
 			}
-			else if (targetPerson->Seat.compare("2") == 0) {	//ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) È¸ï¿½ï¿½
+			else if (targetPerson->Seat.compare("2") == 0) {	//Á¤±â±Ç (ÀÚÀ¯¼®) È¸¿ø
 				season.ChangeSeat_2(PhoneNum, targetPerson);
 			}
 			else if (targetPerson->Seat.compare("3") == 0) {
@@ -159,7 +169,7 @@ int main()
 			}
 
 		}
-		else if (menu.compare("7") == 0) {									// [7] È¸    ï¿½ï¿½
+		else if (menu.compare("7") == 0) {									// [7] È¸    °è
 		
 			time.showTime();
 		
@@ -167,12 +177,12 @@ int main()
 			continue;
 		}
 		else if (menu.compare("Q") != 0) {
-			cout << "ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ô´Ï´ï¿½." << endl;
+			cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù." << endl;
 		}
-	} while (menu != "Q");													// [Q] ï¿½ï¿½    ï¿½ï¿½
+	} while (menu != "Q");													// [Q] Á¾    ·á
 
 
-	// ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½
+	// ÆÄÀÏ¾²±â
 	cout << "Account" << endl;
 	account.writeDB();
 	cout << "time" << endl;
@@ -183,7 +193,7 @@ int main()
 	season.writeFile();
 	cout << "seasonDB" << endl;
 	oneday.writeFile();
-	cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½" << endl;
+	cout << "ÆÄÀÏ ÀúÀå ¿Ï·á" << endl;
 
 	return 0;
 

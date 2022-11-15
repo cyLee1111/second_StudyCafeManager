@@ -71,6 +71,33 @@ bool SeasonDB::deleteSeason(string phonenum)
 
 }
 
+
+//회원 퇴실 (좌석 정보 -1로 만들고 퇴실시간 업데이트)
+bool SeasonDB::exitSeason(string phonenum)
+{
+	Season* temp = start;
+	Season* del;
+	Season* swap;
+	int nodeIndex = 0;
+	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
+	nodeIndex = searchSeasonDB(phonenum) - 1;
+	
+	if (nodeIndex != 0) {
+		temp->DB_seat_num = -1;
+
+	}
+	else {
+		start = temp->next;
+		del = temp;
+	}
+	delete del;
+	cntSize--;
+
+	return true;
+
+}
+
+
 void SeasonDB::ReEntrance(string phonenum, string current_time)
 {
 	Season* temp = start;
@@ -165,6 +192,37 @@ int SeasonDB::searchSeasonDB(string phonenum)
 
 	return 0;
 }
+
+int SeasonDB::searchSeasonDBforExit(string phonenum)
+{
+	int nodeIndex = 1;
+	Season* current = start;
+	int int_seatnum = 100;
+	string string_seatnum;
+	SeatDB seat;
+	cout << "searchSeasonDBforExit:: (시즌DB)" << endl;
+	cout << "찾을 전화번호:" << phonenum << "(시즌DB)" << endl;
+	while (current != NULL)
+	{
+		cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
+		if (current->DB_phone_num == phonenum) {
+			//자리 -1이면 입장한 적이 없는 회원임-> 퇴실이 불가능함
+			if (current->DB_seat_num == "-1") {
+				return 0;
+			}
+			else {
+				return 1;
+			}
+		}
+		else {
+			current = current->next;
+			nodeIndex++;
+		}
+	}
+
+	return -1;
+}
+
 //time 비교해서 만료된 노드 삭제하는 함수
 int SeasonDB::searchSeasonDB_time(string current_time, Person* person)
 {

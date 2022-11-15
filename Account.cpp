@@ -78,7 +78,7 @@ string Account::int2string(int I)
 string Account::plusDate(int Y, int M, int D, int day) {
 
 	day = day - 1;
-	cout << "중단점 걸게\n";
+
 	if ((M % 2 == 1)) //odd month 
 	{
 		if (M <= 7) {  //31까지
