@@ -76,15 +76,16 @@ bool SeasonDB::deleteSeason(string phonenum)
 bool SeasonDB::exitSeason(string phonenum, string current_time)
 {
 	Season* temp = start;
-
+	SeatDB seat;
 	int nodeIndex = 0;
 	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
-	nodeIndex = searchSeasonDB(phonenum) - 1;
+	nodeIndex = searchSeasonDB(phonenum);
 	for (int i = 0; i < nodeIndex - 1; i++)
 	{
 		temp = temp->next;
-	}
+	}	
 	if (nodeIndex != 0) {
+		seat.delSeat(stoi(temp->DB_seat_num));
 		temp->DB_seat_num = "-1";
 		temp->DB_departure_time = current_time;
 	}
