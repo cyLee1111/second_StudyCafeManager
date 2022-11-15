@@ -161,8 +161,10 @@ public:
     int searchSeasonDB(string phonenum);	//전번 있으면 true
     int searchSeasonDB_time(string current_time, Person* person);   //시간보고 회원 삭제
     int searchSeasonDB_retseatIdx(string PhoneNum); //좌석이 없는경우 찬양한테 자리넘버넘겨줘
+    int searchSeasonDBforExit(string phonenum); //회원 퇴실을 위한 회원 탐색(회원 자리가 없을 경우 예외처리를 따로 해줘야해서)
     void ChangeSeat_1(string phone_num, Person* person); //정기권(지정석) 자리 이동
     void ChangeSeat_2(string phone_num, Person* person); //정기권(자유석) 자리 이동
+    bool exitSeason(string phonenum, string current_time);   // 회원 퇴실 함수
 private:
     int cntSize=0;
 };
