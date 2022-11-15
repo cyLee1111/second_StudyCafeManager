@@ -58,50 +58,51 @@ void Time::writeData()
 
 int Time::checkDate(int year, int month, int day)
 {
-	   /* return 값 의미
-	   0 성공
-	   1 31일이 없어요
-	   2 2월 29은 없어요(!윤달)
-	   3.2월 30,31은 없어요 (윤달)
-	   */
-		if ((month % 2 == 1)) //odd month 
-		{
-			if (month <= 7) {
-				//if (day <= 0 || day > 31) return 0;
-			}else { // month > 7 
-				if (day <= 0 || day > 30) return 1;
-			}
+	/* return 값 의미
+	0 성공
+	1 31일이 없어요
+	2 2월 29은 없어요(!윤달)
+	3.2월 30,31은 없어요 (윤달)
+	*/
+	if ((month % 2 == 1)) //odd month 
+	{
+		if (month <= 7) {
+			//if (day <= 0 || day > 31) return 0;
 		}
-		else //even month
-		{
-			if (month <= 6) {
-				if (month == 2)
+		else { // month > 7 
+			if (day <= 0 || day > 30) return 1;
+		}
+	}
+	else //even month
+	{
+		if (month <= 6) {
+			if (month == 2)
+			{
+				if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) // leap year
 				{
-					if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) // leap year
-					{
-						if (day <= 0 || day > 29) return 3;
-					}
-					else if(day <= 0 || day > 28){ //윤달이 아닐때
-						
-						return 2; 
-					}
-
+					if (day <= 0 || day > 29) return 3;
 				}
-				if (day <= 0 || day > 30) return 1;  
+				else if (day <= 0 || day > 28) { //윤달이 아닐때
+
+					return 2;
+				}
+
 			}
-			//else { // month > 6
-
-				//if (day <= 0 || day > 31) return 0;
-			//}
+			if (day <= 0 || day > 30) return 1;
 		}
+		//else { // month > 6
 
-		return 0; //성공
+			//if (day <= 0 || day > 31) return 0;
+		//}
+	}
+
+	return 0; //성공
 }
 
 void Time::insertTime()//시간입력함수
 {
 
-	
+
 	// 이전시간 기록
 	cout << "\n\n******************************" << endl;
 	cout << "마지막 날짜(";
@@ -112,20 +113,20 @@ void Time::insertTime()//시간입력함수
 	// 1) input 길이 12
 	// 2) input 이 다 숫자인지
 	// 예외처리
-	while(1){
-		
+	while (1) {
+
 		cout << "\n현재 날짜는 몇 년 몇 월 며칠입니까?(ex:20221201): \n>> ";
 		scanf_s("%d", &inputDate);
-		
+
 		string strDate;
-		strDate=to_string(inputDate);
-		if(strDate.length()!=8){
-			cout<<"8글자를 입력하셔야합니다."<<endl;
+		strDate = to_string(inputDate);
+		if (strDate.length() != 8) {
+			cout << "8글자를 입력하셔야합니다." << endl;
 			continue;
 		}
-		for(int i=0;i<12;i++){
-			if(strDate[i]<'0'||strDate[i]>'9'){
-				cout<<"숫자만 입력하세요"<<endl;
+		for (int i = 0; i < 8; i++) {
+			if (strDate[i] < '0' || strDate[i]>'9') {
+				cout << "숫자만 입력하세요" << endl;
 				continue;
 			}
 		}
@@ -134,10 +135,10 @@ void Time::insertTime()//시간입력함수
 		M = (inputDate % 10000) / 100;
 		D = (inputDate % 10000) % 100;
 
-		if(inputDate<(bY*10000+bM*100+bD)) {
+		if (inputDate < (bY * 10000 + bM * 100 + bD)) {
 			cout << "** 마지막 날짜 이후의 날짜를 입력하세요. \n" << endl;
 			continue;
-		}if(1900>Y||Y>2999){
+		}if (1900 > Y || Y > 2999) {
 			cout << "** 다시입력하세요.\n" << endl; continue;
 			continue;
 		}if (M < 0 || M>12) {
@@ -145,41 +146,41 @@ void Time::insertTime()//시간입력함수
 		}if (D < 0 || D>31) {
 			cout << "**'일'은 0~31 내에서 입력해주세요\n"; continue;
 		}if (checkDate(Y, M, D) != 0) {
-			cout<<"** 없는 날짜입니다. 다시 입력해주세요\n"; continue;
+			cout << "** 없는 날짜입니다. 다시 입력해주세요\n"; continue;
 		}
-		break; 
+		break;
 	}
-	
+
 	Date = inputDate;
 	//Y = Date / 10000;
-	
+
 
 	cin.clear();
 
 	while (1) {
-		cout << "현재 시간은 몇 시 몇 분 입니까?(ex1:0959 ex2:1701): \n>> ";
-		cin >> Time;
-		
 		string strTime;
-		strTime=to_string(Time);
-		if(strTime.length()!=4){
-			cout<<"4글자를 입력하셔야합니다."<<endl;
+		cout << "현재 시간은 몇 시 몇 분 입니까?(ex1:0959 ex2:1701): \n>> ";
+		cin >> strTime;
+
+		Time = stoi(strTime);
+		if (strTime.length() != 4) {
+			cout << "4글자를 입력하셔야합니다." << endl;
 			continue;
 		}
-		for(int i=0;i<12;i++){
-			if(strTime[i]<'0'||strTime[i]>'9'){
-				cout<<"숫자만 입력하세요"<<endl;
-				continue;
-			}
-		}
-		
-		
+		 for (int i = 0; i < 4; i++) {
+		 	if (strTime[i] < '0' || strTime[i]>'9') {
+		 		cout << "숫자만 입력하세요" << endl;
+		 		continue;
+		 	}
+		 }
+
+
 		H = Time / 100;
 		min = Time % 100;
 		cin.clear();
 
 		if (Date == (bY * 10000 + bM * 100 + bD)) {
-			
+
 			if (Time < (bH * 100 + bmin)) {
 				cout << "마지막 시간 이후의 시간을 입력하세요.\n" << endl;
 				continue;
@@ -189,11 +190,11 @@ void Time::insertTime()//시간입력함수
 			}
 		}
 		if (H < 0 || H>23) {
-				cout << "'시간'은 0~23 안에서 입력해주세요.\n" << endl;
-				continue;
+			cout << "'시간'은 0~23 안에서 입력해주세요.\n" << endl;
+			continue;
 		}if (min < 0 || min>59) {
-				cout << "'분'은 0~59 안에서 입력해주세요.\n" << endl;
-				continue;
+			cout << "'분'은 0~59 안에서 입력해주세요.\n" << endl;
+			continue;
 		}
 
 		break;
@@ -220,7 +221,7 @@ string Time::int2string(int I)
 
 }
 
-string Time::leftTime(string num, string start,string finish)
+string Time::leftTime(string num, string start, string finish)
 {
 	int sY, sM, sD, sH, smin;
 	int lY, lM, lD, lH, lmin;  //끝난시간
@@ -260,7 +261,7 @@ string Time::leftTime(string num, string start,string finish)
 	//cout << Time << "타임입니다";
 	lH = dTime / 100;
 	lmin = dTime % 100;
-	
+
 
 	if (n == 3) { //
 		int a = sH * 60 + smin;
@@ -284,7 +285,7 @@ string Time::leftTime(string num, string start,string finish)
 
 void Time::showTime()
 {
-	cout << "\n("<< bY << "-" << int2string(bM) << "-" << int2string(bD)
+	cout << "\n(" << bY << "-" << int2string(bM) << "-" << int2string(bD)
 		<< "  " << int2string(bH) << ":" << int2string(bmin) << ")\n";
 
 }

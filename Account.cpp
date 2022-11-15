@@ -1,8 +1,8 @@
 ﻿#include "header.h"
 
 
-void Account::whatTime(string time){
-	T=time;
+void Account::whatTime(string time) {
+	T = time;
 }
 
 void Account::readDB()
@@ -35,7 +35,7 @@ void Account::readDB()
 
 	file.close();
 
-	totalAccount = Saccount+Oaccount;
+	//totalAccount = Saccount + Oaccount;
 
 }
 
@@ -64,7 +64,7 @@ void Account::showAccount()
 	cout << "정기권 총액 : " << Saccount << endl;
 	cout << "단일권 총액 : " << Oaccount << endl;
 	cout << "------------------------------" << endl;
-	cout << "전체 매출 : " << totalAccount << endl;
+	cout << "전체 매출 : " << Saccount+Oaccount << endl;
 	cout << "------------------------------" << endl;
 }
 
@@ -75,48 +75,41 @@ string Account::int2string(int I)
 
 }
 
-string Account::plusDate(int Y, int M, int D, int day, int price, int* all) {
+string Account::plusDate(int Y, int M, int D, int day) {
 
 	day = day - 1;
+	cout << "중단점 걸게\n";
 	if ((M % 2 == 1)) //odd month 
 	{
 		if (M <= 7) {  //31까지
-			if (31- day <= D) {  // 달 안넘겨줘도됨
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				all += price;
+			if (31 - day >= D) {  // 달 안넘겨줘도됨
+
 				return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 			}
 			else { // 달 넘겨줌
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				all += price;
+
 				return to_string(Y) + int2string(M + 1) + int2string((D + day) - 31) + "2359";
 			}
 		}
 		else { // month > 7  30까지
-			if (30- day <= D) {  // 달 안넘겨줘도됨
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				all += price;
+			if (30 - day >= D) {  // 달 안넘겨줘도됨
+
 				return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 			}
 			else { // 달 넘겨줌
-				cout << price << "원 결제합니다. (Enter)\n";
-				checkEnter();
-				all += price;
+
 				return to_string(Y) + int2string(M + 1) + int2string((D + day) - 30) + "2359";
 			}
 		}
 	}
 	else //even month
 	{
-		if (month <= 6) {
-			if (month == 2)
+		if (M <= 6) {
+			if (M == 2)
 			{
-				if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) // leap year
+				if (((Y % 4 == 0) && (Y % 100 != 0)) || (Y % 400 == 0)) // leap year
 				{
-					if (29- day <= D) {  // 달 안넘겨줘도됨
+					if (29 - day >= D) {  // 달 안넘겨줘도됨
 
 						return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 					}
@@ -127,7 +120,7 @@ string Account::plusDate(int Y, int M, int D, int day, int price, int* all) {
 				}
 				else { //윤달이 아닌 2월
 
-					if (28- day <= D) {  // 달 안넘겨줘도됨
+					if (28 - day >= D) {  // 달 안넘겨줘도됨
 
 						return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 					}
@@ -139,29 +132,29 @@ string Account::plusDate(int Y, int M, int D, int day, int price, int* all) {
 
 			}
 			else { //윤달아닌
-				if(M==12){//12월일때
-					if (31 - day <= D) {  // 달 안넘겨줘도됨
+				if (M == 12) {//12월일때
+					if (31 - day >= D) {  // 달 안넘겨줘도됨
 
 						return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 					}
 					else { // 달 넘겨줌
-						return to_string(Y+1) + int2string(1) + int2string((D + day) - 31) + "2359";
+						return to_string(Y + 1) + int2string(1) + int2string((D + day) - 31) + "2359";
 					}
-					
+
 				}
-				if (30- day <= D) {  // 달 안넘겨줘도됨
+				if (30 - day >= D) {  // 달 안넘겨줘도됨
 
 					return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 				}
 				else { // 달 넘겨줌
-					
+
 					return to_string(Y) + int2string(M + 1) + int2string((D + day) - 30) + "2359";
 				}
 			}
 		}
 		else { // month > 6
 
-			if (25 <= D) {  // 달 안넘겨줘도됨
+			if (25 >= D) {  // 달 안넘겨줘도됨
 
 				return to_string(Y) + int2string(M) + int2string(D + day) + "2359";
 			}
@@ -180,10 +173,10 @@ string Account::payTicket(string seat)
 	int hour, day;
 
 
-//날짜
+	//날짜
 	stringstream ssInt(seat);
 	ssInt >> num;
-	string sDate,sTime; 
+	string sDate, sTime;
 	sDate.assign(T, 0, 8);
 	sTime.assign(T, 8, 11);
 
@@ -226,6 +219,7 @@ string Account::payTicket(string seat)
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
 			Saccount += price;
+			cout<<"돈!!!!!!!1"<<Saccount<<endl;
 			return plusDate(Y, M, D, day);
 		}
 		else if (choice == 2) {  //14일
@@ -233,6 +227,7 @@ string Account::payTicket(string seat)
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
 			Saccount += price;
+			cout<<"돈!!!!!!!1"<<Saccount<<endl;
 			return plusDate(Y, M, D, day);
 		}
 		else if (choice == 3) {   //28일
@@ -240,6 +235,8 @@ string Account::payTicket(string seat)
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
 			Saccount += price;
+			cout<<"돈!!!!!!!1"<<Saccount<<endl;
+
 			return plusDate(Y, M, D, day);
 		}
 
@@ -292,10 +289,10 @@ string Account::payTicket(string seat)
 			return to_string(Y) + int2string(M) + int2string(D) + "2359";
 		}
 	}
-			
+
 
 	return "0";
-	
+
 }
 
 
