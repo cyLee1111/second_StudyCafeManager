@@ -73,25 +73,25 @@ bool SeasonDB::deleteSeason(string phonenum)
 
 
 //회원 퇴실 (좌석 정보 -1로 만들고 퇴실시간 업데이트)
-bool SeasonDB::exitSeason(string phonenum)
+bool SeasonDB::exitSeason(string phonenum, string current_time)
 {
 	Season* temp = start;
-	Season* del;
-	Season* swap;
+
 	int nodeIndex = 0;
 	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
 	nodeIndex = searchSeasonDB(phonenum) - 1;
-	
+	for (int i = 0; i < nodeIndex - 1; i++)
+	{
+		temp = temp->next;
+	}
 	if (nodeIndex != 0) {
-		temp->DB_seat_num = -1;
-
+		temp->DB_seat_num = "-1";
+		temp->DB_departure_time = current_time;
 	}
 	else {
-		start = temp->next;
-		del = temp;
+		return false;
 	}
-	delete del;
-	cntSize--;
+
 
 	return true;
 
@@ -181,7 +181,7 @@ int SeasonDB::searchSeasonDB(string phonenum)
 				int_seatnum = seat.chooseSeat(2);
 				current->DB_seat_num = to_string(int_seatnum);
 				cout << "정기권 자유석 자리 받아서 업데이트 했습니다(seasondb.cpp)" << endl;
-			}
+			} 
 			return nodeIndex;
 		}
 		else {
@@ -205,6 +205,7 @@ int SeasonDB::searchSeasonDBforExit(string phonenum)
 	while (current != NULL)
 	{
 		cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
+		
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 입장한 적이 없는 회원임-> 퇴실이 불가능함
 			if (current->DB_seat_num == "-1") {
@@ -343,12 +344,12 @@ bool SeasonDB::readFile()
 		//cout << "파일 출력 확인\n";
 
 		getline(file, phone_num, '\n');
+		cout << "-----------------------phone_num-----------------------------" << phone_num << endl;
 		if (phone_num == "") {
 			break;
 		}
 
 
-		getline(file, phone_num, '\n');
 		getline(file, payment_date, '\n');
 		getline(file, expert_date, '\n');
 		getline(file, seat_num, '\n');

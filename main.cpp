@@ -18,6 +18,7 @@ int main()
 	personDB.readFile();
 	string menu;
 	do {
+		cin.clear();
 		// 시간입력하기함수
 		time.insertTime();
 		//현재 시간
@@ -116,7 +117,7 @@ int main()
 			cout << "회원퇴실" << endl;
 			string PhoneNum = personDB.inputPhoneNum();
 			if (season.searchSeasonDBforExit(PhoneNum)==1) {		//좌석 있는 정기권 회원이 퇴실을 원하는 경우 
-				season.exitSeason(PhoneNum);
+				season.exitSeason(PhoneNum, currentTime);
 				cout << "퇴실 처리 되었습니다." << endl;
 				
 			}

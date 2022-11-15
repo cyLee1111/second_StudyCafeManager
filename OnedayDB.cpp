@@ -271,7 +271,7 @@ bool OnedayDB::readFile()
 		if (phone_num == "") {
 			break;
 		}
-		getline(file, phone_num, '\n');
+
 		getline(file, payment_date, '\n');
 		getline(file, expert_date, '\n');
 		getline(file, seat_num, '\n');
