@@ -32,22 +32,23 @@ int main()
 		//personDB.deleteEndPerson(currentTime);
 
 		time.showTime();
-		cout << "정기권 만료 회원이 있다면 삭제합니다..." << endl;
+		//cout << "정기권 만료 회원이 있다면 삭제합니다..." << endl;
 
 
 		// 출력
 		 Person* person;
 		 while((person=personDB.deleteEndPerson(currentTime))!=NULL){
 		 	seat.delSeat(season.searchSeasonDB_time(currentTime,person));
+			seat.delSeat(oneday.searchOnedayDB_time(currentTime, person));
 		 }
 
 
-		time.showTime();
-		cout << "단일권 만료 회원이 있다면 삭제합니다..." << endl;
-		 //출력
-		 while((person=personDB.deleteEndPerson(currentTime))!=NULL){
-		 	seat.delSeat(oneday.searchOnedayDB_time(currentTime,person));
-		 }
+		//time.showTime();
+		//cout << "단일권 만료 회원이 있다면 삭제합니다..." << endl;
+		// //출력
+		// while((person=personDB.deleteEndPerson(currentTime))!=NULL){
+		// 	seat.delSeat(oneday.searchOnedayDB_time(currentTime,person));
+		// }
 	
 		 cin.clear();
 		

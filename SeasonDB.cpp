@@ -148,7 +148,6 @@ int SeasonDB::searchSeasonDB_retseatIdx(string phonenum)
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 자유석임 -> 자리선택해줘 ->  db에 넣기
 			if (current->DB_seat_num == "-1") {
-				cout << "자리를 선택해주세요\n찬양 함수 호출해서 자리번호 배정받았다고 침(시즌DB)\n";
 				int_seatnum = seat.chooseSeat(2);
 				current->DB_seat_num = to_string(int_seatnum);
 				cout << "정기권 자유석 자리 받아서 업데이트 했습니다(seasondb.cpp)" << endl;
@@ -178,7 +177,6 @@ int SeasonDB::searchSeasonDB(string phonenum)
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 자유석임 -> 자리선택해줘 ->  db에 넣기
 			if (current->DB_seat_num == "-1") {
-				cout << "자리를 선택해주세요\n찬양 함수 호출해서 자리번호 배정받았다고 침(시즌DB)\n";
 				int_seatnum = seat.chooseSeat(2);
 				current->DB_seat_num = to_string(int_seatnum);
 				cout << "정기권 자유석 자리 받아서 업데이트 했습니다(seasondb.cpp)" << endl;

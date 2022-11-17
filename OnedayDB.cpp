@@ -63,7 +63,7 @@ bool OnedayDB::deleteOneday(string phonenum)
 	int nodeIndex = 0;
 	//searchOnedayDB에서 전화번호로 탐색하여 인덱스값을 반환 받음
 	nodeIndex = searchOnedayDB(phonenum) - 1;
-	cout << nodeIndex << "번째 노드 삭제함 (OnedayDB.cpp)\n";
+	//cout << nodeIndex << "번째 노드 삭제함 (OnedayDB.cpp)\n";
 	if (nodeIndex != 0) {
 		for (int i = 0; i < nodeIndex - 1; i++)
 		{
@@ -114,9 +114,9 @@ void OnedayDB::ReEntranceNseat(string phonenum, int seatnum, string current_time
 
 	temp->DB_arrival_time = current_time;
 	temp->DB_seat_num = to_string(seatnum);
-	cout << "단일권 고객 재입장 입실시간,자리번호 업데이트함(OnedayDB.cpp)" << endl;
+	/*cout << "단일권 고객 재입장 입실시간,자리번호 업데이트함(OnedayDB.cpp)" << endl;
 	cout << "업데이트한 도착시간 : " << temp->DB_arrival_time << " 현재시간과 동일해야함(OnedayDB.cpp)" << endl;
-	cout << "업데이트한 자리번호 : " << temp->DB_seat_num << " (OnedayDB.cpp)" << endl;
+	cout << "업데이트한 자리번호 : " << temp->DB_seat_num << " (OnedayDB.cpp)" << endl;*/
 
 }
 
@@ -128,19 +128,19 @@ int OnedayDB::searchOnedayDB_retseatIdx(string phonenum)
 	int int_seatnum = 100;
 	string string_seatnum;
 	SeatDB seat;
-	cout << "searchOnedayDB:: (onedayDB)" << endl;
-	cout << "찾을 전화번호:" << phonenum << "(onedayDB)" << endl;
+	/*cout << "searchOnedayDB:: (onedayDB)" << endl;
+	cout << "찾을 전화번호:" << phonenum << "(onedayDB)" << endl;*/
 	while (current != NULL)
 	{
-		cout << "노드속 전화번호:" << current->DB_phone_num << "(onedayDBDB)" << endl;
+		//cout << "노드속 전화번호:" << current->DB_phone_num << "(onedayDBDB)" << endl;
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 자유석임 -> 자리선택해줘 ->  db에 넣기
 			if (current->DB_seat_num == "-1") {
-				cout << "자리를 선택해주세요\n찬양 함수 호출해서 자리번호 배정받았다고 침(onedayDB)\n";
+				//cout << "자리를 선택해주세요\n찬양 함수 호출해서 자리번호 배정받았다고 침(onedayDB)\n";
 				int_seatnum = seat.chooseSeat(3);
 				current->DB_seat_num = to_string(int_seatnum);
 
-				cout << "단일권 자리 받아서 업데이트 했습니다(onedayDB.cpp)" << endl;
+				//cout << "단일권 자리 받아서 업데이트 했습니다(onedayDB.cpp)" << endl;
 			}
 			return int_seatnum;
 		}
@@ -156,8 +156,8 @@ int OnedayDB::searchOnedayDB(string phonenum)
 {
 	int nodeIndex = 1;
 	Oneday* current = start;
-	cout << "searchOnedayDB:: (OnedayDB.cpp)" << endl;
-	cout << "찾을 전화번호:" << phonenum << "(OnedayDB.cpp)" << endl;
+	//cout << "searchOnedayDB:: (OnedayDB.cpp)" << endl;
+	//cout << "찾을 전화번호:" << phonenum << "(OnedayDB.cpp)" << endl;
 	while (current != NULL)
 	{
 		cout << "노드속 전화번호:" << current->DB_phone_num << " (OnedayDB.cpp)" << endl;
@@ -174,10 +174,9 @@ int OnedayDB::searchOnedayDB(string phonenum)
 }
 
 
-
+//time 비교해서 만료된 노드 삭제하는 함수
 int OnedayDB::searchOnedayDB_time(string current_time, Person* person)
 {
-
 	Oneday* current = start;
 	SeatDB seat;
 	int int_seatnum = 0;
@@ -186,21 +185,23 @@ int OnedayDB::searchOnedayDB_time(string current_time, Person* person)
 	// cout << "searchSeasonDB::" << endl;
 	// cout << "찾을 전화번호:" << phonenum << endl;
 //	cout<<"현재시간 : "<< double_current_time <<" (OnedayDB.cpp)"<<endl;
+	cout << "단일권 만료 회원이 있다면 삭제합니다..." << endl;
 	if (current == NULL || current->DB_phone_num == "") {
 		return -1;
 	}
+	
+
 	while (current != nullptr)
 	{
 
 		double_expert_date = stod(current->DB_expert_date);
-		//		cout<<"넘어가나2"<<endl;
-		//		cout << "kkk" << double_expert_date << " "<< endl;
+		//cout << "현재시간: " << double_current_time << "\n" << "노드 내 만료 시간: " << double_expert_date<<endl;
 		if (double_current_time >= double_expert_date) {
 			//cout << current->DB_phone_num << " 고객님 만료시간 : " << current->DB_expert_date << "OnedayDB에서 삭제할 예정입니다. (OnedayDB.cpp)\n"<<endl;
 			//cout<<current->DB_seat_num<<endl;
 			int_seatnum = stoi(current->DB_seat_num);
 			string seat_str = seat.idxToString(int_seatnum);
-			cout << "단일권 회원 " << seat_str << "석 " << person->Name << "님 정기권 만료되었습니다." << endl;
+			cout << "단일권 회원 " << seat_str << "석 " << person->Name << "님 단일권 만료되었습니다." << endl;
 			//			cout<<"넘겨줄 자리 번호 확인할게: "<<seatnum_return <<endl;
 			deleteOneday(current->DB_phone_num);
 			//cout<<"삭제되었습니다.\n"<<endl;

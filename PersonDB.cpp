@@ -100,7 +100,7 @@ Person* PersonDB::deleteEndPerson(string curtime) {
             current = current->next;
         }
     }
-    cout << "PersonDB삭제끝" << endl;
+   // cout << "PersonDB삭제끝" << endl;
     return current;
 };
 
@@ -163,11 +163,11 @@ bool PersonDB::deletePerson(string Phonenum) {
     }
     //startpoint
     if (strncmp(target->PhoneNum.c_str(), Phonenum.c_str(), 11) == 0 || strncmp(target->PhoneNum.c_str(), Phonenum.c_str(), 10) == 0) {
-        cout << "1.personDB삭제:" << target->PhoneNum << endl;
+       // cout << "1.personDB삭제:" << target->PhoneNum << endl;
         startPoint = target->next;
         size--;
         //free(target);
-        cout << "회원이 삭제되었습니다." << endl;
+       // cout << "회원이 삭제되었습니다." << endl;
         return true;
     }
     // target=target->next;
