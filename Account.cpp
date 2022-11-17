@@ -64,7 +64,7 @@ void Account::showAccount()
 	cout << "정기권 총액 : " << Saccount << endl;
 	cout << "단일권 총액 : " << Oaccount << endl;
 	cout << "------------------------------" << endl;
-	cout << "전체 매출 : " << Saccount+Oaccount << endl;
+	cout << "전체 매출 : " << Saccount + Oaccount << endl;
 	cout << "------------------------------" << endl;
 }
 
@@ -218,25 +218,27 @@ string Account::payTicket(string seat)
 			day = 7; price = 70;
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
+			while (getchar() != '\n');
 			Saccount += price;
-			cout<<"돈!!!!!!!1"<<Saccount<<endl;
+			cout << "돈!!!!!!!1" << Saccount << endl;
 			return plusDate(Y, M, D, day);
 		}
 		else if (choice == 2) {  //14일
 			day = 14; price = 140;
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
+			while (getchar() != '\n');
 			Saccount += price;
-			cout<<"돈!!!!!!!1"<<Saccount<<endl;
+			cout << "돈!!!!!!!1" << Saccount << endl;
 			return plusDate(Y, M, D, day);
 		}
 		else if (choice == 3) {   //28일
 			day = 28; price = 280;
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
+			while (getchar() != '\n');
 			Saccount += price;
-			cout<<"돈!!!!!!!1"<<Saccount<<endl;
-
+			cout << "돈!!!!!!!1" << Saccount << endl;
 			return plusDate(Y, M, D, day);
 		}
 
@@ -256,12 +258,14 @@ string Account::payTicket(string seat)
 			if (H >= 16) {
 				cout << price << "원 결제합니다. (Enter)\n";
 				checkEnter();
+				while (getchar() != '\n');
 				Oaccount += price;
 				return to_string(Y) + int2string(M) + int2string(D) + "2359";
 			}
 			else {
 				cout << price << "원 결제합니다. (Enter)\n";
 				checkEnter();
+				while (getchar() != '\n');
 				Oaccount += price;
 				return to_string(Y) + int2string(M) + int2string(D) + int2string(H + hour) + int2string(min);
 			}
@@ -271,12 +275,14 @@ string Account::payTicket(string seat)
 			if (H >= 8) {
 				cout << price << "원 결제합니다. (Enter)\n";
 				checkEnter();
+				while (getchar() != '\n');
 				Oaccount += price;
 				return to_string(Y) + int2string(M) + int2string(D) + "2359";
 			}
 			else {
 				cout << price << "원 결제합니다. (Enter)\n";
 				checkEnter();
+				while (getchar() != '\n');
 				Oaccount += price;
 				return to_string(Y) + int2string(M) + int2string(D) + int2string(H + hour) + int2string(min);
 			}
@@ -285,6 +291,7 @@ string Account::payTicket(string seat)
 			hour = 24; price = 24;
 			cout << price << "원 결제합니다. (Enter)\n";
 			checkEnter();
+			while (getchar() != '\n');
 			Oaccount += price;
 			return to_string(Y) + int2string(M) + int2string(D) + "2359";
 		}

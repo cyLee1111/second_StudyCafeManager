@@ -18,6 +18,7 @@ int main()
 	personDB.readFile();
 	string menu;
 	do {
+		
 		cin.clear();
 		// 시간입력하기함수
 		time.insertTime();
@@ -47,15 +48,18 @@ int main()
 		 while((person=personDB.deleteEndPerson(currentTime))!=NULL){
 		 	seat.delSeat(oneday.searchOnedayDB_time(currentTime,person));
 		 }
+	
+		 cin.clear();
 		
-		cin.clear();
 		cout << endl;
 		cout << "┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────┐" << endl;
 		cout << "│ [1] 회원가입 │ │ [2] 회원입장 │ │ [3] 회원퇴실 │ │ [4] 회원확인 │ │ [5] 좌석확인 │ │ [6] 좌석이동 │ │ [7] 회    계 │ │ 종료: Q│" << endl;
 		cout << "└──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └────────┘" << endl;
 		cout << ">> ";
 		cin >> menu;
+		while (getchar() != '\n');
 		cin.clear();
+		
 		if (menu.compare("1") == 0) {											// [1] 회원가입
 			personDB.signup(currentTime, &account);
 			//회원 가입 완료 / 혹은 실패

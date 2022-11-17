@@ -91,7 +91,7 @@ Person* PersonDB::deleteEndPerson(string curtime) {
     while (current != NULL && current->PhoneNum != "") {
         if (stod(current->endDate) < stod(curtime)) {
 
-             Person* temp=current;
+            Person* temp = current;
             deletePerson(current->PhoneNum);
             return temp;
             current = current->next;
@@ -122,8 +122,8 @@ void PersonDB::showPersonInfo(string phonenum, string currentTime) {
         else if (strncmp(seatNum.c_str(), "2", 1) == 0) {
             output = "단일권";
         }
-        else{
-            cout<<"올바르지 않은 입력입니다"<<endl;
+        else {
+            cout << "올바르지 않은 입력입니다" << endl;
             return;
         }
         Time time;
@@ -268,15 +268,15 @@ bool PersonDB::signup(string currentTime, Account* inaccount) {
     string seatNum;
     if (strncmp(inseat.c_str(), "1", 1) == 0) {
         SeatDB seat;
-        if(seat.isFull()){
-            cout<<"현재 좌석이 모두 사용중입니다. 정기권-지정석 선택이 불가합니다."<<endl;
+        if (seat.isFull()) {
+            cout << "현재 좌석이 모두 사용중입니다. 정기권-지정석 선택이 불가합니다." << endl;
             return false;
         }
         seatInt = seat.chooseSeat(stoi("1"));
         seatNum = to_string(seatInt);
     }
-    else if(strncmp(inseat.c_str(), "2", 1)!=0&&strncmp(inseat.c_str(), "3", 1)!=0) {
-        cout<<"올바르지 않은 입력입니다.";
+    else if (strncmp(inseat.c_str(), "2", 1) != 0 && strncmp(inseat.c_str(), "3", 1) != 0) {
+        cout << "올바르지 않은 입력입니다.";
         return false;
     }
     cout << "결제로 이동합니다." << endl;
@@ -294,12 +294,13 @@ bool PersonDB::signup(string currentTime, Account* inaccount) {
         //지금 자리없고 이따 필요할때
 
         seasonDB.signup(PhoneNum, currentTime, endTime, "-1", "0", "0");
-    }else if (strncmp(inseat.c_str(), "3", 1) == 0) {
+    }
+    else if (strncmp(inseat.c_str(), "3", 1) == 0) {
         onedayDB.signup(PhoneNum, currentTime, endTime, "-1", "0", "0");
 
     }
     else {
-        cout<<"올바르지 않은 입력입니다.";
+        cout << "올바르지 않은 입력입니다.";
         return false;
     }
     cout << "회원가입이 완료되었습니다." << endl;
@@ -312,15 +313,15 @@ bool PersonDB::signup(string PhoneNum, string currentTime, Account* inaccount) {
     string seatNum;
     if (strncmp(inseat.c_str(), "1", 1) == 0) {
         SeatDB seat;
-        if(seat.isFull()){
-            cout<<"현재 좌석이 모두 사용중입니다. 정기권-지정석 선택이 불가합니다."<<endl;
+        if (seat.isFull()) {
+            cout << "현재 좌석이 모두 사용중입니다. 정기권-지정석 선택이 불가합니다." << endl;
             return false;
         }
         seatInt = seat.chooseSeat(stoi("1"));
         seatNum = to_string(seatInt);
     }
-    else if(strncmp(inseat.c_str(), "2", 1)!=0&&strncmp(inseat.c_str(), "3", 1)!=0) {
-        cout<<"올바르지 않은 입력입니다.";
+    else if (strncmp(inseat.c_str(), "2", 1) != 0 && strncmp(inseat.c_str(), "3", 1) != 0) {
+        cout << "올바르지 않은 입력입니다.";
         return false;
     }
     cout << "\n결제로 이동합니다.\n" << endl;
@@ -440,7 +441,7 @@ string PersonDB::inputSeat() {
         cout << "2. 정기권 - 자유석" << endl;
         cout << "3. 단일권 - 자유석" << endl;
         cout << ">> ";
-        getline(cin,Seat);
+        getline(cin, Seat);
         cin.clear();
     } while (!checkSeat(Seat));
     cin.clear();

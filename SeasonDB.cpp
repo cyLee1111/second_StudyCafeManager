@@ -83,7 +83,7 @@ bool SeasonDB::exitSeason(string phonenum, string current_time)
 	for (int i = 0; i < nodeIndex - 1; i++)
 	{
 		temp = temp->next;
-	}	
+	}
 	if (nodeIndex != 0) {
 		seat.delSeat(stoi(temp->DB_seat_num));
 		temp->DB_seat_num = "-1";
@@ -182,7 +182,7 @@ int SeasonDB::searchSeasonDB(string phonenum)
 				int_seatnum = seat.chooseSeat(2);
 				current->DB_seat_num = to_string(int_seatnum);
 				cout << "정기권 자유석 자리 받아서 업데이트 했습니다(seasondb.cpp)" << endl;
-			} 
+			}
 			return nodeIndex;
 		}
 		else {
@@ -206,7 +206,7 @@ int SeasonDB::searchSeasonDBforExit(string phonenum)
 	while (current != NULL)
 	{
 		cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
-		
+
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 입장한 적이 없는 회원임-> 퇴실이 불가능함
 			if (current->DB_seat_num == "-1") {
@@ -345,7 +345,6 @@ bool SeasonDB::readFile()
 		//cout << "파일 출력 확인\n";
 
 		getline(file, phone_num, '\n');
-		cout << "-----------------------phone_num-----------------------------" << phone_num << endl;
 		if (phone_num == "") {
 			break;
 		}

@@ -79,6 +79,7 @@ int SeatDB::chooseSeat(int memType)
 		showSeat();
 		cout << "\n좌석을 선택하세요(ex: A3, C10)(□: 빈 좌석, ▦: 자유석, ■: 지정석) : ";
 		cin >> chooseS;
+		while (getchar() != '\n');
 	} while (!checkInput(chooseS));
 
 	int chooseIdx = checkInput(chooseS) - 1;
@@ -107,6 +108,9 @@ int SeatDB::checkInput(string s)
 	s1 = s.substr(0, 1);
 	s2 = s.substr(1);
 
+	if (s2.compare("") == 0) {
+		return 0;
+	}
 	if (s1.compare("A") < 0 || s1.compare("C") > 0) {
 		return 0;
 	}
