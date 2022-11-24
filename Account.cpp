@@ -220,7 +220,7 @@ string Account::payTicket(string seat)
 			checkEnter();
 			while (getchar() != '\n');
 			Saccount += price;
-			cout << "돈!!!!!!!1" << Saccount << endl;
+			//cout << "돈!!!!!!!1" << Saccount << endl;
 			return plusDate(Y, M, D, day);
 		}
 		else if (choice == 2) {  //14일
@@ -229,7 +229,7 @@ string Account::payTicket(string seat)
 			checkEnter();
 			while (getchar() != '\n');
 			Saccount += price;
-			cout << "돈!!!!!!!1" << Saccount << endl;
+			//cout << "돈!!!!!!!1" << Saccount << endl;
 			return plusDate(Y, M, D, day);
 		}
 		else if (choice == 3) {   //28일
@@ -238,7 +238,7 @@ string Account::payTicket(string seat)
 			checkEnter();
 			while (getchar() != '\n');
 			Saccount += price;
-			cout << "돈!!!!!!!1" << Saccount << endl;
+			//cout << "돈!!!!!!!1" << Saccount << endl;
 			return plusDate(Y, M, D, day);
 		}
 

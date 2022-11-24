@@ -35,7 +35,7 @@ void OnedayDB::AddNode(Oneday _oneday)
 
 		return;
 	}
-	cout << "addNode안되었어요(onedaydb.cpp)" << endl;
+
 
 }
 void OnedayDB::printData()
@@ -160,7 +160,6 @@ int OnedayDB::searchOnedayDB(string phonenum)
 	//cout << "찾을 전화번호:" << phonenum << "(OnedayDB.cpp)" << endl;
 	while (current != NULL)
 	{
-		cout << "노드속 전화번호:" << current->DB_phone_num << " (OnedayDB.cpp)" << endl;
 		if (current->DB_phone_num == phonenum) {
 			return nodeIndex;
 		}
@@ -169,7 +168,6 @@ int OnedayDB::searchOnedayDB(string phonenum)
 			nodeIndex++;
 		}
 	}
-	cout << "일치하는 회원정보가 없습니다.(OnedayDB.cpp)\n";
 	return 0;
 }
 

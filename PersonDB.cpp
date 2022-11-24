@@ -52,7 +52,7 @@ bool PersonDB::addPerson(Person target) {
     return false;
 };
 Person* PersonDB::searchPerson(string phonenum) {
-    cout << "searchstart" << endl;
+    //cout << "searchstart" << endl;
     Person* current = startPoint;
     // while(currentIndex!=size){
     while (current != NULL) {
@@ -64,7 +64,7 @@ Person* PersonDB::searchPerson(string phonenum) {
             current = current->next;
         }
     }
-    cout << "없는 회원입니다." << endl;
+    //cout << "없는 회원입니다." << endl;
     return NULL;
 };
 // void PersonDB::deleteOneday(string time){
@@ -119,7 +119,7 @@ void PersonDB::showPersonInfo(string phonenum, string currentTime) {
         else if (strncmp(seatNum.c_str(), "2", 1) == 0) {
             output = "정기권(자유석)";
         }
-        else if (strncmp(seatNum.c_str(), "2", 1) == 0) {
+        else if (strncmp(seatNum.c_str(), "3", 1) == 0) {
             output = "단일권";
         }
         else {

@@ -140,11 +140,10 @@ int SeasonDB::searchSeasonDB_retseatIdx(string phonenum)
 	int int_seatnum = 100;
 	string string_seatnum;
 	SeatDB seat;
-	cout << "searchSeasonDB:: (시즌DB)" << endl;
-	cout << "찾을 전화번호:" << phonenum << "(시즌DB)" << endl;
+	
 	while (current != NULL)
 	{
-		cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
+		
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 자유석임 -> 자리선택해줘 ->  db에 넣기
 			if (current->DB_seat_num == "-1") {
@@ -169,8 +168,7 @@ int SeasonDB::searchSeasonDB(string phonenum)
 	int int_seatnum = 100;
 	string string_seatnum;
 	SeatDB seat;
-	cout << "searchSeasonDB:: (시즌DB)" << endl;
-	cout << "찾을 전화번호:" << phonenum << "(시즌DB)" << endl;
+	
 	while (current != NULL)
 	{
 		cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
