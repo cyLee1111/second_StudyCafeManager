@@ -183,7 +183,7 @@ int OnedayDB::searchOnedayDB_time(string current_time, Person* person)
 	// cout << "searchSeasonDB::" << endl;
 	// cout << "찾을 전화번호:" << phonenum << endl;
 //	cout<<"현재시간 : "<< double_current_time <<" (OnedayDB.cpp)"<<endl;
-	cout << "단일권 만료 회원이 있다면 삭제합니다..." << endl;
+	//cout << "단일권 만료 회원이 있다면 삭제합니다..." << endl;
 	if (current == NULL || current->DB_phone_num == "") {
 		return -1;
 	}
