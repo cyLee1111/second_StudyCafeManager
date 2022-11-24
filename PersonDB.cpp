@@ -100,7 +100,6 @@ Person* PersonDB::deleteEndPerson(string curtime) {
             current = current->next;
         }
     }
-   // cout << "PersonDB삭제끝" << endl;
     return current;
 };
 
