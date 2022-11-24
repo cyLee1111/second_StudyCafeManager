@@ -38,7 +38,6 @@ void SeasonDB::AddNode(Season _season)
 		return;
 	}
 
-	cout << "addNode안되었어요(seasondb.cpp)" << endl;
 }
 
 //노드 삭제 함수
@@ -50,7 +49,6 @@ bool SeasonDB::deleteSeason(string phonenum)
 	int nodeIndex = 0;
 	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
 	nodeIndex = searchSeasonDB(phonenum) - 1;
-	cout << nodeIndex << "번째 노드 삭제됩니다. (시즌DB)" << endl;
 	if (nodeIndex != 0) {
 		for (int i = 0; i < nodeIndex - 1; i++)
 		{
@@ -111,7 +109,6 @@ void SeasonDB::ReEntrance(string phonenum, string current_time)
 
 	temp->DB_arrival_time = current_time;
 
-	//	cout << " 정기권 고객 재입장 입실시간 업데이트함(SeasonDB.cpp)\n";
 
 }
 void SeasonDB::ReEntranceNseat(string phonenum, int seatnum, string current_time)
@@ -127,10 +124,7 @@ void SeasonDB::ReEntranceNseat(string phonenum, int seatnum, string current_time
 	temp->DB_arrival_time = current_time;
 	temp->DB_seat_num = to_string(seatnum);
 
-	cout << "정기권 고객 재입장 입실시간,자리번호 업데이트함(SeasonDB.cpp)\n";
-	cout << "업데이트한 도착시간 : " << temp->DB_arrival_time << " 현재시간과 동일해야함(SeasonDB.cpp)\n";
-	cout << "업데이트한 자리번호 : " << temp->DB_seat_num << "(시즌DB)" << endl;
-
+	
 }
 //자리번호 넘겨줄 함수
 int SeasonDB::searchSeasonDB_retseatIdx(string phonenum)
@@ -149,7 +143,6 @@ int SeasonDB::searchSeasonDB_retseatIdx(string phonenum)
 			if (current->DB_seat_num == "-1") {
 				int_seatnum = seat.chooseSeat(2);
 				current->DB_seat_num = to_string(int_seatnum);
-				//cout << "정기권 자유석 자리 받아서 업데이트 했습니다(seasondb.cpp)" << endl;
 			}
 			return int_seatnum;
 		}
@@ -171,13 +164,11 @@ int SeasonDB::searchSeasonDB(string phonenum)
 	
 	while (current != NULL)
 	{
-		//cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 자유석임 -> 자리선택해줘 ->  db에 넣기
 			if (current->DB_seat_num == "-1") {
 				int_seatnum = seat.chooseSeat(2);
 				current->DB_seat_num = to_string(int_seatnum);
-				//cout << "정기권 자유석 자리 받아서 업데이트 했습니다(seasondb.cpp)" << endl;
 			}
 			return nodeIndex;
 		}
@@ -197,11 +188,9 @@ int SeasonDB::searchSeasonDBforExit(string phonenum)
 	int int_seatnum = 100;
 	string string_seatnum;
 	SeatDB seat;
-	cout << "searchSeasonDBforExit:: (시즌DB)" << endl;
-	cout << "찾을 전화번호:" << phonenum << "(시즌DB)" << endl;
+	
 	while (current != NULL)
 	{
-		cout << "노드속 전화번호:" << current->DB_phone_num << "(시즌DB)" << endl;
 
 		if (current->DB_phone_num == phonenum) {
 			//자리 -1이면 입장한 적이 없는 회원임-> 퇴실이 불가능함
@@ -231,16 +220,13 @@ int SeasonDB::searchSeasonDB_time(string current_time, Person* person)
 
 	int int_seatnum = 0;
 
-	//	cout<<"현재시간 : "<< double_current_time <<" (SeasonDB.cpp)"<<endl;
 	if (current == NULL || current->DB_phone_num == "") {
 		return -1;
 	}
 	while (current != nullptr)
 	{
 		double double_expert_date = stod(current->DB_expert_date);
-		//		cout <<"kkk"<< double_expert_date << " " << double_current_time << endl;
 		if (double_current_time >= double_expert_date) {
-			//cout<<current->DB_phone_num<<" 고객님 만료시간 : "<<current->DB_expert_date<<" SeasonDB에서 삭제합니다. (SeasonDB.cpp)\n";
 			int_seatnum = stoi(current->DB_seat_num);
 			string seat_str = seat.idxToString(int_seatnum);
 			cout << "정기권 회원 " << seat_str << "석 " << person->Name << "님 정기권 만료되었습니다.\n";
@@ -409,29 +395,3 @@ bool SeasonDB::writeFile()
 	}
 
 }
-
-/*
-int main()
-{
-	SeasonDB season;
-
-	season.readFile();
-	bool tf;
-
-	season.signup("전화번호","결제일시","만료일시","-1","입실시간","퇴실시간");
-	//재입장 관련
-	tf=season.searchSeasonDB("전화번호");
-	if (tf)
-
-		cout << "재입장 가능\n";
-	else
-		cout << "입장 불가\n";
-	//퇴실 관련
-	tf = season.searchSeasonDB("01037937506");
-	season.deleteSeason("01037937506");
-
-	//season.deleteSeason("01012345888");
-	season.writeFile();
-
-}
-*/
