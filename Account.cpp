@@ -193,6 +193,8 @@ string Account::payTicket(string seat)
 
 	//결제정보입력
 
+	retry:
+
 	if (num == 1 || num == 2) {  //정기권
 		int choice;
 		if (num == 1) {
@@ -212,6 +214,11 @@ string Account::payTicket(string seat)
 			cout << "이용하실 이용권을 선택해주세요 >> ";
 			cin >> choice;
 			cin.clear();
+		}
+
+		if (!(choice == 1 || choice == 2 || choice == 3)) {
+			cout << "다시 입력해주세요. \n" << endl;
+			goto retry;
 		}
 
 		if (choice == 1) { //7일
@@ -252,6 +259,11 @@ string Account::payTicket(string seat)
 		cout << "이용하실 이용권을 선택해주세요 >> ";
 		cin >> choice;
 		cin.clear();
+
+		if (!(choice == 1 || choice == 2 || choice == 3)) {
+			cout << "다시 입력해주세요. \n" << endl;
+			goto retry;
+		}
 
 		if (choice == 1) {
 			hour = 8; price = 8;
