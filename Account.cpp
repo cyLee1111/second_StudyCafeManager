@@ -204,6 +204,12 @@ string Account::payTicket(string seat)
 			cout << "3. 28일 ------- 280원\n";
 			cout << "이용하실 이용권을 선택해주세요 >> ";
 			cin >> choice;
+			if (cin.fail()) {
+				cout << "1,2,3 중에서 입력해주세요.\n" << endl;
+				cin.clear();
+				cin.ignore(256, '\n');
+				goto retry;
+			}
 			cin.clear();
 		}
 		if (num == 2) {
@@ -213,11 +219,18 @@ string Account::payTicket(string seat)
 			cout << "3. 28일 ------- 280원\n";
 			cout << "이용하실 이용권을 선택해주세요 >> ";
 			cin >> choice;
+			if (cin.fail()) {
+				cout << "1,2,3 중에서 입력해주세요.\n" << endl;
+				cin.clear();
+				cin.ignore(256, '\n');
+				goto retry;
+				
+			}
 			cin.clear();
 		}
 
 		if (!(choice == 1 || choice == 2 || choice == 3)) {
-			cout << "다시 입력해주세요. \n" << endl;
+			cout << "1,2,3 중에서 입력해주세요. \n" << endl;
 			goto retry;
 		}
 
@@ -258,10 +271,16 @@ string Account::payTicket(string seat)
 		cout << "3. 24시간 ------- 24원\n";
 		cout << "이용하실 이용권을 선택해주세요 >> ";
 		cin >> choice;
+		if (cin.fail()) {
+			cout << "1,2,3 중에서 입력해주세요.\n" << endl;
+			cin.clear();
+			cin.ignore(256, '\n');
+			goto retry;
+		}
 		cin.clear();
 
 		if (!(choice == 1 || choice == 2 || choice == 3)) {
-			cout << "다시 입력해주세요. \n" << endl;
+			cout << "1,2,3 중에서 입력해주세요.\n" << endl;
 			goto retry;
 		}
 
