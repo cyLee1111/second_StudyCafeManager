@@ -22,6 +22,7 @@ void getTime(string currentTime) {
 bool PersonDB::addPerson(Person target) {
     if (size == 0)
     {
+        startPoint = new Person();
         startPoint->PhoneNum = target.PhoneNum;
         startPoint->Name = target.Name;
         startPoint->Seat = target.Seat;
@@ -52,11 +53,10 @@ bool PersonDB::addPerson(Person target) {
     return false;
 };
 Person* PersonDB::searchPerson(string phonenum) {
-    //cout << "searchstart" << endl;
     Person* current = startPoint;
     // while(currentIndex!=size){
     while (current != NULL) {
-        if (strncmp(current->PhoneNum.c_str(), phonenum.c_str(), 11) == 0 || strncmp(current->PhoneNum.c_str(), phonenum.c_str(), 10) == 0) {
+        if (strncmp(current->PhoneNum.c_str(), phonenum.c_str(), phonenum.length()) == 0 && current->PhoneNum.length() == phonenum.length()) {
 
             return current;
         }
@@ -64,7 +64,7 @@ Person* PersonDB::searchPerson(string phonenum) {
             current = current->next;
         }
     }
-    //cout << "없는 회원입니다." << endl;
+    cout << "없는 회원입니다." << endl;
     return NULL;
 };
 // void PersonDB::deleteOneday(string time){
@@ -90,16 +90,16 @@ Person* PersonDB::deleteEndPerson(string curtime) {
     // while(currentIndex!=size){    
     while (current != NULL && current->PhoneNum != "") {
         if (stod(current->endDate) < stod(curtime)) {
-
             Person* temp = current;
             deletePerson(current->PhoneNum);
+            printf("%d", this->size);
             return temp;
-            current = current->next;
         }
         else {
             current = current->next;
         }
     }
+   // cout << "PersonDB삭제끝" << endl;
     return current;
 };
 
@@ -138,11 +138,9 @@ void PersonDB::showPersonInfo(string phonenum, string currentTime) {
 
         Dat = stoi(Date);
         T = stoi(Time);
-        //cout << Date << "날짜" << Time << "시간\n";
         Y = Dat / 10000;
         M = (Dat % 10000) / 100;
         D = (Dat % 10000) % 100;
-        //cout << Time << "타임입니다";
         H = T / 100;
         min = T % 100;
         cout << "[";
@@ -161,26 +159,15 @@ bool PersonDB::deletePerson(string Phonenum) {
         return false;
     }
     //startpoint
-    if (strncmp(target->PhoneNum.c_str(), Phonenum.c_str(), 11) == 0 || strncmp(target->PhoneNum.c_str(), Phonenum.c_str(), 10) == 0) {
-       // cout << "1.personDB삭제:" << target->PhoneNum << endl;
-        startPoint = target->next;
+    if (strncmp(target->PhoneNum.c_str(), Phonenum.c_str(), Phonenum.length()) == 0 && target->PhoneNum.length()==Phonenum.length()) {
+        this->startPoint = target->next;
         size--;
-        //free(target);
-       // cout << "회원이 삭제되었습니다." << endl;
         return true;
     }
-    // target=target->next;
-    // nextptr=nextptr->next;
     while (nextptr != NULL) {
-        // cout<<"삭제:"<<nextptr->PhoneNum<<endl;
-        // cout<<"삭제:"<<Phonenum<<endl;
-
-        if (strncmp(nextptr->PhoneNum.c_str(), Phonenum.c_str(), 11) == 0 || strncmp(nextptr->PhoneNum.c_str(), Phonenum.c_str(), 10) == 0) {
-            cout << "2. personDB삭제:" << nextptr->Name << endl;
+        if (strncmp(target->PhoneNum.c_str(), Phonenum.c_str(), Phonenum.length()) == 0 && target->PhoneNum.length() == Phonenum.length()) {
             target->next = nextptr->next;
             size--;
-            // cout<<"회원이 삭제되었습니다."<<endl;
-            //free(nextptr);
             return true;
         }
         else {
@@ -188,7 +175,6 @@ bool PersonDB::deletePerson(string Phonenum) {
             nextptr = nextptr->next;
         }
     }
-
     cout << "delete:입력한 회원정보가 존재하지 않습니다." << endl;
     return false;
 };
@@ -374,7 +360,7 @@ bool PersonDB::checkPhoneNum(string PhoneNum) {
         return false;
     }
     if (PhoneNum.length() == 11 || PhoneNum.length() == 10) {
-        for (int j = 3; j < 11; j++) {
+        for (int j = 3; j < PhoneNum.length(); j++) {
             if (varify[j] < '0' || varify[j]>'9') {
                 cout << "전화번호는 숫자를 입력하여야합니다." << endl;
                 return false;
@@ -405,7 +391,7 @@ bool PersonDB::checkSeat(string Seat) {
     if (strncmp(Seat.c_str(), "3", 1) == 0 || strncmp(Seat.c_str(), "2", 1) == 0 || strncmp(Seat.c_str(), "1", 1) == 0) {
         return true;
     }
-    cout << "좌석을 다시 입력하세요" << endl;
+    cout << "회원권을 다시 선택하세요" << endl;
     return false;
 };
 

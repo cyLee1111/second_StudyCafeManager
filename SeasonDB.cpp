@@ -48,7 +48,8 @@ bool SeasonDB::deleteSeason(string phonenum)
 	Season* swap;
 	int nodeIndex = 0;
 	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
-	nodeIndex = searchSeasonDB(phonenum) - 1;
+	//자리 없는 사람이 만료되었을 경우에는 자리 선택하게 하면 안되니까 searchSeasonDB바꿔
+	nodeIndex = new_searchSeasonDB(phonenum) - 1;
 	if (nodeIndex != 0) {
 		for (int i = 0; i < nodeIndex - 1; i++)
 		{
@@ -77,7 +78,8 @@ bool SeasonDB::exitSeason(string phonenum, string current_time)
 	SeatDB seat;
 	int nodeIndex = 0;
 	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
-	nodeIndex = searchSeasonDB(phonenum);
+	//자리 없는 사람이 퇴실할 경우에는 자리 선택하게 하면 안되니까 new_searchSeasonDB
+	nodeIndex = new_searchSeasonDB(phonenum);
 	for (int i = 0; i < nodeIndex - 1; i++)
 	{
 		temp = temp->next;
@@ -154,6 +156,8 @@ int SeasonDB::searchSeasonDB_retseatIdx(string phonenum)
 
 	return int_seatnum;
 }
+
+
 int SeasonDB::searchSeasonDB(string phonenum)
 {
 	int nodeIndex = 1;
@@ -177,7 +181,29 @@ int SeasonDB::searchSeasonDB(string phonenum)
 			nodeIndex++;
 		}
 	}
+	return 0;
+}
 
+
+//자리 없는 사람이 퇴실이나 만료를 원할 경우 자리를 선택하게 하면 안되니까
+int SeasonDB::new_searchSeasonDB(string phonenum)
+{
+	int nodeIndex = 1;
+	Season* current = start;
+	int int_seatnum = 100;
+	string string_seatnum;
+	SeatDB seat;
+
+	while (current != NULL)
+	{
+		if (current->DB_phone_num == phonenum) {
+			return nodeIndex;
+		}
+		else {
+			current = current->next;
+			nodeIndex++;
+		}
+	}
 	return 0;
 }
 
@@ -229,7 +255,12 @@ int SeasonDB::searchSeasonDB_time(string current_time, Person* person)
 		if (double_current_time >= double_expert_date) {
 			int_seatnum = stoi(current->DB_seat_num);
 			string seat_str = seat.idxToString(int_seatnum);
-			cout << "정기권 회원 " << seat_str << "석 " << person->Name << "님 정기권 만료되었습니다.\n";
+			if (seat_str == "A0") {
+				cout << "정기권 회원 " << person->Name << "님 정기권 만료되었습니다.\n";
+			}
+			else {
+				cout << "정기권 회원 " << seat_str << "석 " << person->Name << "님 정기권 만료되었습니다.\n";
+			}
 			deleteSeason(current->DB_phone_num);
 			current = start;
 			return int_seatnum;
@@ -244,6 +275,7 @@ int SeasonDB::searchSeasonDB_time(string current_time, Person* person)
 void SeasonDB::ChangeSeat_1(string phone_num, Person* person) {
 	Season* temp = start;
 	SeatDB seat;
+	
 	int nodeIndex = searchSeasonDB(phone_num) - 1;
 
 	for (int i = 0; i < nodeIndex - 1; i++)

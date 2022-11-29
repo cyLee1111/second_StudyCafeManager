@@ -159,6 +159,7 @@ public:
     void ReEntrance(string phonenum, string current_time);  //재입장
     void ReEntranceNseat(string phonenum, int seatnum, string current_time);  //재입장 자리선택 필요한경우
     int searchSeasonDB(string phonenum);	//전번 있으면 true
+    int new_searchSeasonDB(string phonenum);    //퇴실이나 만료인경우 자리 없는 회원일 때 좌석 선택하면 안되니까 따로처리
     int searchSeasonDB_time(string current_time, Person* person);   //시간보고 회원 삭제
     int searchSeasonDB_retseatIdx(string PhoneNum); //좌석이 없는경우 찬양한테 자리넘버넘겨줘
     int searchSeasonDBforExit(string phonenum); //회원 퇴실을 위한 회원 탐색(회원 자리가 없을 경우 예외처리를 따로 해줘야해서)
