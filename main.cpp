@@ -13,8 +13,8 @@ int main()
 	// 파일읽기
 	account.readDB();
 	time.readData();
-	season.readFile();
-	oneday.readFile();
+	personDB.seasonDB.readFile();
+	personDB.onedayDB.readFile();
 	personDB.readFile();
 	string menu;
 	do {
@@ -37,19 +37,21 @@ int main()
 
 		// 출력
 		 Person* person;
+		 cout << "만료 안됨?" << endl;
 		 while((person=personDB.deleteEndPerson(currentTime))!=NULL){
-		 	seat.delSeat(season.searchSeasonDB_time(currentTime,person));
-			seat.delSeat(oneday.searchOnedayDB_time(currentTime, person));
+			 if (person->Seat == "1" || person->Seat == "2") {
+				 seat.delSeat(personDB.seasonDB.searchSeasonDB_time(currentTime, person));
+			 }
+			 else {
+				 seat.delSeat(personDB.onedayDB.searchOnedayDB_time(currentTime, person));
+			 }
 		 }
 
 
 		//time.showTime();
 		//cout << "단일권 만료 회원이 있다면 삭제합니다..." << endl;
-		// //출력
-		// while((person=personDB.deleteEndPerson(currentTime))!=NULL){
-		// 	seat.delSeat(oneday.searchOnedayDB_time(currentTime,person));
-		// }
-	
+		 //출력
+		 
 		 cin.clear();
 		
 		cout << endl;
@@ -80,19 +82,19 @@ int main()
 			cout << "targetperson seat 출력" << targetPerson->Seat << endl;
 			if (targetPerson->Seat.compare("1") == 0) {	// 전화번호O, 입장
 				cout << "정기권 (지정석)" << endl;				//주석
-				season.ReEntrance(PhoneNum, currentTime);
+				personDB.seasonDB.ReEntrance(PhoneNum, currentTime);
 				cout << "입장입니다 ^^ (정기권)" << endl;
 			}
 			else if (targetPerson->Seat.compare("2") == 0) {
 				cout << "정기권 (자유석)" << endl;				//주석
 				//좌석 있음
-				if ((season.searchSeasonDB_retseatIdx(PhoneNum) > 0)) {
-					season.ReEntrance(PhoneNum, currentTime);
+				if ((personDB.seasonDB.searchSeasonDB_retseatIdx(PhoneNum) > 0)) {
+					personDB.seasonDB.ReEntrance(PhoneNum, currentTime);
 				}
 				else {
 					//좌석 x  - 좌석 배정
 					int seatnum = seat.chooseSeat(2);
-					season.ReEntranceNseat(PhoneNum, seatnum, currentTime);
+					personDB.seasonDB.ReEntranceNseat(PhoneNum, seatnum, currentTime);
 				}
 				//입장
 				cout << "입장입니다 ^^ (정기권)" << endl;
@@ -100,14 +102,14 @@ int main()
 			else if (targetPerson->Seat.compare("3") == 0) {
 				cout << "단일권" << endl;
 				//좌석 있음
-				if (oneday.searchOnedayDB_retseatIdx(PhoneNum) > 0) {
-					oneday.ReEntrance(PhoneNum, currentTime);
+				if (personDB.onedayDB.searchOnedayDB_retseatIdx(PhoneNum) > 0) {
+					personDB.onedayDB.ReEntrance(PhoneNum, currentTime);
 				}
 				else {
 					//좌석 없음
 					//좌석 배정
 					int seatnum = seat.chooseSeat(3);
-					oneday.ReEntranceNseat(PhoneNum, seatnum, currentTime);
+					personDB.onedayDB.ReEntranceNseat(PhoneNum, seatnum, currentTime);
 				}
 				cout << "입장입니다 ^^ (단일권)" << endl;
 			}
@@ -121,15 +123,15 @@ int main()
 			bool ft;
 			cout << "회원퇴실" << endl;
 			string PhoneNum = personDB.inputPhoneNum();
-			if (season.searchSeasonDBforExit(PhoneNum)==1) {		//좌석 있는 정기권 회원이 퇴실을 원하는 경우 
-				season.exitSeason(PhoneNum, currentTime);
+			if (personDB.seasonDB.searchSeasonDBforExit(PhoneNum)==1) {		//좌석 있는 정기권 회원이 퇴실을 원하는 경우 
+				personDB.seasonDB.exitSeason(PhoneNum, currentTime);
 				cout << "퇴실 처리 되었습니다." << endl;
 				
 			}
-			else if (season.searchSeasonDBforExit(PhoneNum) == 0) {	//좌석 없는 정기권 회원이 퇴실을 원하는 경우
+			else if (personDB.seasonDB.searchSeasonDBforExit(PhoneNum) == 0) {	//좌석 없는 정기권 회원이 퇴실을 원하는 경우
 				cout << "이용중인 좌석이 없습니다." << endl;
 			}
-			else if (oneday.searchOnedayDB(PhoneNum)) {				//단일권 회원이 퇴실을 원하는 경우
+			else if (personDB.onedayDB.searchOnedayDB(PhoneNum)) {				//단일권 회원이 퇴실을 원하는 경우
 				cout << "단일권 회원은 일정시간이 지난 후 자동 퇴실처리가 됩니다." << endl;
 				
 			}
@@ -165,13 +167,13 @@ int main()
 			}
 
 			if (targetPerson->Seat.compare("1") == 0) {	//정기권 (지정석) 회원
-				season.ChangeSeat_1(PhoneNum, targetPerson);
+				personDB.seasonDB.ChangeSeat_1(PhoneNum, targetPerson);
 			}
 			else if (targetPerson->Seat.compare("2") == 0) {	//정기권 (자유석) 회원
-				season.ChangeSeat_2(PhoneNum, targetPerson);
+				personDB.seasonDB.ChangeSeat_2(PhoneNum, targetPerson);
 			}
 			else if (targetPerson->Seat.compare("3") == 0) {
-				oneday.ChangeSeat_3(PhoneNum, targetPerson);
+				personDB.onedayDB.ChangeSeat_3(PhoneNum, targetPerson);
 			}
 
 		}
@@ -196,9 +198,9 @@ int main()
 	cout << "time" << endl;
 	personDB.writeFile();
 	cout << "personDB" << endl;
-	season.writeFile();
+	personDB.seasonDB.writeFile();
 	cout << "seasonDB" << endl;
-	oneday.writeFile();
+	personDB.onedayDB.writeFile();
 	cout << "파일 저장 완료" << endl;
 
 	return 0;

@@ -3,9 +3,11 @@
 //노드를 연결리스트에 추가하는 함수
 void SeasonDB::AddNode(Season _season)
 {
-
 	if (cntSize == 0)
 	{
+		start = new Season();
+		cout << "추가 되는지 " << _season.DB_phone_num << endl;
+
 		start->DB_phone_num = _season.DB_phone_num;
 		start->DB_arrival_time = _season.DB_arrival_time;
 		start->DB_departure_time = _season.DB_departure_time;
@@ -50,6 +52,20 @@ bool SeasonDB::deleteSeason(string phonenum)
 	//searchSeasonDB에서 전화번호로 탐색하여 인덱스+1값을 반환 받음
 	//자리 없는 사람이 만료되었을 경우에는 자리 선택하게 하면 안되니까 searchSeasonDB바꿔
 	nodeIndex = new_searchSeasonDB(phonenum) - 1;
+	if (cntSize == 0)
+	{
+		cout << "회원이 없습니다." << endl;
+		return false;
+	}
+	//startpoint
+	if (start->DB_phone_num==phonenum) {
+		temp = start->next;
+		delete start;
+		start = temp;
+		cntSize--;
+		return true;
+	}
+	//node는 1부터
 	if (nodeIndex != 0) {
 		for (int i = 0; i < nodeIndex - 1; i++)
 		{
@@ -63,9 +79,10 @@ bool SeasonDB::deleteSeason(string phonenum)
 		start = temp->next;
 		del = temp;
 	}
+
 	delete del;
 	cntSize--;
-
+	
 	return true;
 
 }
@@ -181,7 +198,7 @@ int SeasonDB::searchSeasonDB(string phonenum)
 			nodeIndex++;
 		}
 	}
-	return 0;
+	return nodeIndex;
 }
 
 
@@ -204,7 +221,7 @@ int SeasonDB::new_searchSeasonDB(string phonenum)
 			nodeIndex++;
 		}
 	}
-	return 0;
+	return nodeIndex;
 }
 
 int SeasonDB::searchSeasonDBforExit(string phonenum)
@@ -255,6 +272,7 @@ int SeasonDB::searchSeasonDB_time(string current_time, Person* person)
 		if (double_current_time >= double_expert_date) {
 			int_seatnum = stoi(current->DB_seat_num);
 			string seat_str = seat.idxToString(int_seatnum);
+			//cout << "삭제되는거 확인:" << endl;
 			if (seat_str == "A0") {
 				cout << "정기권 회원 " << person->Name << "님 정기권 만료되었습니다.\n";
 			}
@@ -276,18 +294,20 @@ void SeasonDB::ChangeSeat_1(string phone_num, Person* person) {
 	Season* temp = start;
 	SeatDB seat;
 	
-	int nodeIndex = searchSeasonDB(phone_num) - 1;
+	int nodeIndex = new_searchSeasonDB(phone_num) - 1;
 
 	for (int i = 0; i < nodeIndex - 1; i++)
 	{
 		temp = temp->next;
 	}
-	if (temp->DB_seat_num == "- 1") {
+	if (temp->DB_seat_num == "-1") {
 		int seat2 = seat.chooseSeat(1);
 		if (seat2 == -1) {
 			return;
 		}
 		temp->DB_seat_num = to_string(seat2);
+		seat.showSeat();
+		return;
 	}
 	string seat1 = seat.idxToString(stoi(temp->DB_seat_num));
 	cout << person->Name << "님 현재 " << seat1 << " 좌석 이용중입니다." << endl;
@@ -307,19 +327,22 @@ void SeasonDB::ChangeSeat_1(string phone_num, Person* person) {
 void SeasonDB::ChangeSeat_2(string phone_num, Person* person) {
 	Season* temp = start;
 	SeatDB seat;
-	int nodeIndex = searchSeasonDB(phone_num) - 1;
-
+	int nodeIndex = new_searchSeasonDB(phone_num) - 1;
+	cout << nodeIndex<<endl;
 	for (int i = 0; i < nodeIndex - 1; i++)
 	{
 		temp = temp->next;
 	}
-	if (temp->DB_seat_num == "- 1") {
+	if (temp->DB_seat_num == "-1") {
 		cout << "좌석을 선택해주세요.\n" << endl;
-		int seat2 = seat.chooseSeat(1);
+		int seat2 = seat.chooseSeat(2);
 		if (seat2 == -1) {
 			return;
 		}
 		temp->DB_seat_num = to_string(seat2);
+		//cout << "check" << endl;
+		seat.showSeat();
+		return;
 	}
 	string seat1 = seat.idxToString(stoi(temp->DB_seat_num));
 	cout << person->Name << "님 현재 " << seat1 << " 좌석 이용중입니다." << endl;
@@ -381,7 +404,7 @@ bool SeasonDB::readFile()
 }
 void SeasonDB::signup(string phone_num, string payment_date, string expert_date, string seat_num, string arrival_time, string departure_time)
 {
-	AddNode(Season(phone_num, payment_date, expert_date, seat_num, arrival_time, departure_time));
+	this->AddNode(Season(phone_num, payment_date, expert_date, seat_num, arrival_time, departure_time));
 }
 
 bool SeasonDB::writeFile()
@@ -401,13 +424,13 @@ bool SeasonDB::writeFile()
 		Season* temp = start;
 
 		if (temp == NULL || temp->DB_phone_num == "") {
-			cout << "Season_person 0명" << endl;
+			//cout << "Season_person 0명" << endl;
 			file.close();
 			return true;
 		}
 
 		while (temp != NULL) {
-			cout << "seasondb temp값 null아님" << endl;
+			//cout << "seasondb temp값 null아님" << endl;
 			file << temp->DB_phone_num << "\n";
 			file << temp->DB_payment_date << "\n";
 			file << temp->DB_expert_date << "\n";

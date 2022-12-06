@@ -4,6 +4,7 @@ void OnedayDB::AddNode(Oneday _oneday)
 
 	if (cntSize == 0)
 	{
+		start = new Oneday();
 		start->DB_phone_num = _oneday.DB_phone_num;
 		start->DB_arrival_time = _oneday.DB_arrival_time;
 		start->DB_departure_time = _oneday.DB_departure_time;
@@ -62,9 +63,22 @@ bool OnedayDB::deleteOneday(string phonenum)
 	Oneday* swap;
 	int nodeIndex = 0;
 	//searchOnedayDB에서 전화번호로 탐색하여 인덱스값을 반환 받음
-	nodeIndex = searchOnedayDB(phonenum) - 1;
+	nodeIndex = searchOnedayDB(phonenum) -1;
+	if (cntSize == 0)
+	{
+		cout << "회원이 없습니다." << endl;
+		return false;
+	}
+	//startpoint
+	if (start->DB_phone_num == phonenum) {
+		temp = start->next;
+		delete start;
+		start = temp;
+		cntSize--;
+		return true;
+	}
 	if (nodeIndex != 0) {
-		for (int i = 0; i < nodeIndex - 1; i++)
+		for (int i = 0; i < nodeIndex -1; i++)
 		{
 			temp = temp->next;
 		}
@@ -186,7 +200,11 @@ int OnedayDB::searchOnedayDB_time(string current_time, Person* person)
 			
 			int_seatnum = stoi(current->DB_seat_num);
 			string seat_str = seat.idxToString(int_seatnum);
-			cout << "단일권 회원 " << seat_str << "석 " << person->Name << "님 단일권 만료되었습니다." << endl;
+			if (seat_str == "A0") {
+				cout << "단일권 회원 " << person->Name << "님 단일권 만료되었습니다.\n";
+			}
+			else
+				cout << "단일권 회원 " << seat_str << "석 " << person->Name << "님 단일권 만료되었습니다." << endl;
 			deleteOneday(current->DB_phone_num);
 			current = start;
 			return int_seatnum;
@@ -207,13 +225,15 @@ void OnedayDB::ChangeSeat_3(string phone_num, Person* person) {
 	{
 		temp = temp->next;
 	}
-	if (temp->DB_seat_num == "- 1") {
+	if (temp->DB_seat_num == "-1") {
 		cout << "좌석을 선택해주세요.\n" << endl;
-		int seat2 = seat.chooseSeat(1);
+		int seat2 = seat.chooseSeat(2);
 		if (seat2 == -1) {
 			return;
 		}
 		temp->DB_seat_num = to_string(seat2);
+		seat.showSeat();
+		return;
 	}
 	string seat1 = seat.idxToString(stoi(temp->DB_seat_num));
 	cout << person->Name << "님 현재 " << seat1 << " 좌석 이용중입니다." << endl;
